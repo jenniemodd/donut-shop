@@ -59,4 +59,10 @@ const sugarMunk = {
   image: "images/sugar-munk.jpg"
 };
 
-const products = [plainMunk, chocolateMunk, sugarMunk];
+const products = [
+    plainMunk, 
+    glazedMunk, 
+    sugarMunk
+];
+
+const productsListing = document.querySelector('#products');

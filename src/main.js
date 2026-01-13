@@ -1,7 +1,7 @@
 /*
 PSEUDOKOD – WEBBSHOP MED MUNKAR
 
-1. Skapa en array med produkterna för munkarna: plain, chocolate och sugar
+1. Skapa en array med produkterna för munkarna: plain, glazed och sugar
    Varje produkt ska ha:
    - name
    - price
@@ -43,8 +43,8 @@ const plainMunk = {
   image: "images/plain-munk.jpg"
 };
 
-const chocolateMunk = {
-  name: "Chocolate Munk",
+const glazedMunk = {
+  name: "Glazed Munk",
   price: 45,
   rating: 4.5,
   category: "chocolate",
@@ -58,7 +58,5 @@ const sugarMunk = {
   category: "sugar",
   image: "images/sugar-munk.jpg"
 };
-
-console.log(plainMunk.price);
 
 const products = [plainMunk, chocolateMunk, sugarMunk];

@@ -1,18 +1,52 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/FFO6Kf7w)
-# Inlämningsuppgift 1 i JavaScript intro
+## Pseudokod – Webbshop med munkar
 
-Se kurswebben för specifikation och kravlista.
+START
 
-> [!CAUTION]
-> Deadlinen på denna uppgift är en s.k. "hård deadline". Efter deadline går det inte att pusha till repot.
+Skapa en lista (array) med produkter
+Varje produkt ska innehålla:
+- namn
+- pris
+- rating
+- kategori
+- bildadress
 
-## Att göra i repot
-- [ ] Öppna filen `vite.config.js` och byt ut `base`-värdet mot ditt repos adress.
-- [ ] Gå in på Settings-fliken i ditt repo och aktivera GitHub Pages. Välj "GitHub Actions" som alternativ.
-- [ ] Se till att adressen till din GitHub Pages finns på repots startsida (via kugghjulet).
+Skapa minst 10 produkter
+Tilldela varje produkt en kategori:
+- plain
+- chocolate
+- sugar
 
-Om "Pages"-actionet misslyckas första gången så borde det gå igenom efter att du gör en ny push. Alternativt kan du gå in på "Actions"-fliken och välja "Re-run failed jobs" efter att du har aktiverat GitHub Pages.
+Spara alla produkter i en gemensam produktlista
 
-Om din CSS/bilder inte syns så har du förmodligen inte ändrat/skrivit fel adress i `vite.config.js`-filen.
+Skapa HTML-struktur:
+- en container för filterknappar
+- en container där produkter ska visas
 
-GitHub Pages-cachen är också ganska "aggressiv"/beständig. Öppna "DevTools" i webbläsaren, klicka på "Network"-fliken och klicka sedan i "Disable cache". Håll DevTools uppe och ladda om sidan, så borde det släppa.
+När sidan laddas:
+- visa alla produkter från produktlistan
+
+För varje produkt som ska visas:
+- skapa HTML-element
+- visa bild
+- visa namn
+- visa pris
+- visa rating
+- lägg till produkten i produktcontainern
+
+Skapa filter (interaktiva element):
+- filter för plain
+- filter för chocolate
+- filter för sugar
+- knapp för att visa alla produkter
+
+När ett filter klickas:
+- ta reda på vilken kategori som valts
+- filtrera produktlistan baserat på vald kategori
+- töm produktcontainern
+- visa endast filtrerade produkter
+
+När "visa alla" klickas:
+- töm produktcontainern
+- visa alla produkter igen
+
+SLUT

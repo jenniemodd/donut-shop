@@ -58,3 +58,20 @@ const sugarMunk = {
   category: "sugar",
   image: "images/sugar-munk.jpg"
 };
+
+console.log(plainMunk.price);
+
+const products = [plainMunk, chocolateMunk, sugarMunk];
+
+const productContainer = document.getElementById("product-container");
+const filterButtons = document.querySelectorAll(".filter-button");
+
+function renderProducts(list) {
+  productContainer.innerHTML = "";
+  list.forEach(product => {
+    const productHTML = `
+      <div class="product">
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>Price: $${product.price}</p>
+        <p>Rating: ${product.rating} stars</p>

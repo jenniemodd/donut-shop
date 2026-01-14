@@ -45,15 +45,15 @@ const plainMunk = {
   image: "images/plain-munk.jpg"
 };
 
-const plainMunk = {
-  name: "Vanlig Munk 6-pack",
-  price: 200,
+const plainMunk6Pack = {
+  name: "Vanlig Munk 3-pack",
+  price: 100,
   rating: 4,
   category: "plain",
   image: "images/plain-munk.jpg"
 };
 
-const plainMunk = {
+const plainMunk3Pack = {
   name: "Vanlig Munk 3-pack",
   price: 100,
   rating: 4,
@@ -70,7 +70,7 @@ const glazedMunk = {
   image: "images/chocolate-munk.jpg"
 };
 
-const glazedMunk = {
+const glazedMunkblueberry = {
   name: "Glazed Munk",
   price: 45,
   rating: 4,
@@ -78,7 +78,7 @@ const glazedMunk = {
   image: "images/blueberry-munk.jpg"
 };
 
-const glazedMunk = {
+const glazedMunkrasberry = {
   name: "Glazed Munk",
   price: 45,
   rating: 3.8,
@@ -86,7 +86,7 @@ const glazedMunk = {
   image: "images/blueberry-munk.jpg"
 };
 
-const glazedMunk = {
+const glazedMunkstrawberry = {
   name: "Glazed Munk",
   price: 45,
   rating: 4.3,
@@ -103,7 +103,7 @@ const sugarMunk = {
   image: "images/sugar-munk.jpg"
 };
 
-const sugarMunk = {
+const sugarMunk6Pack = {
   name: "Socker Munk 6-pack",
   price: 180,
   rating: 4,
@@ -111,7 +111,7 @@ const sugarMunk = {
   image: "images/sugar-munk.jpg"
 };
 
-const sugarMunk = {
+const sugarMunk3Pack = {
   name: "Socker Munk 3-pack",
   price: 80,
   rating: 4,

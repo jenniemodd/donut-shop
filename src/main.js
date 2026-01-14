@@ -63,34 +63,34 @@ const plainMunk3Pack = {
 
 
 const glazedMunk = {
-  name: "Glazed Munk",
+  name: "Glaserad Munk",
   price: 45,
   rating: 4.5,
-  category: "chocolate",
-  image: "images/chocolate-munk.jpg"
+  category: "glazed",
+  image: "images/chocholate-munk.jpg"
 };
 
 const glazedMunkblueberry = {
-  name: "Glazed Munk",
+  name: "Blåbär Munk",
   price: 45,
   rating: 4,
-  category: "blueberry",
+  category: "glazed",
   image: "images/blueberry-munk.jpg"
 };
 
 const glazedMunkrasberry = {
-  name: "Glazed Munk",
+  name: "Hallon Munk",
   price: 45,
   rating: 3.8,
-  category: "rasberry",
+  category: "glazed",
   image: "images/blueberry-munk.jpg"
 };
 
 const glazedMunkstrawberry = {
-  name: "Glazed Munk",
+  name: "Jordgubb Munk",
   price: 45,
   rating: 4.3,
-  category: "strawberry",
+  category: "glazed",
   image: "images/strawberry-munk.jpg"
 };
 
@@ -120,9 +120,16 @@ const sugarMunk3Pack = {
 };
 
 const products = [
-    plainMunk, 
-    glazedMunk, 
-    sugarMunk
+     plainMunk,
+  plainMunk3Pack,
+  plainMunk6Pack,
+  glazedMunk,
+  glazedMunkblueberry,
+  glazedMunkrasberry,
+  glazedMunkstrawberry,
+  sugarMunk,
+  sugarMunk3Pack,
+  sugarMunk6Pack
 ];
 
 const productsListing = document.querySelector('#products');

@@ -34,7 +34,7 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
    - skicka hela products-arrayen till renderProducts
 */
 
-import 'styles/style.css';
+import 'styles/style.scss';
 
 const plainMunk = {
   name: "Plain Munk",

@@ -210,6 +210,6 @@ function renderProducts() {
     // Lägg till HTML i containern
     productsListing.innerHTML += html;
   });
+}
 
   renderProducts();
-}

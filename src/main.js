@@ -132,8 +132,84 @@ const products = [
   sugarMunk6Pack
 ];
 
+// -------------------------------------------------------
+// -----------Container där produkterna visas ------------
+// -------------------------------------------------------
+
 const productsListing = document.querySelector('#products');
 
-for (let i = 0; i < products.length; i++) {
-    console.log(products[i]);
+// -------------------------------------------------------
+// ----------------------Filterknappar -------------------
+// -------------------------------------------------------
+const allFilterBtn = document.querySelector('#allTypes');
+const plainFilterBtn = document.querySelector('#plain');
+const glazedFilterBtn = document.querySelector('#glazed');
+const sugarFilterBtn = document.querySelector('#sugar');
+
+let filteredProducts = Array.from(products); // Filtrerad lista
+
+// Eventlyssnare (Knapp lyssnar efter klick)
+
+allFilterBtn.addEventListener('click', showAllProducts);
+plainFilterBtn.addEventListener('click', filterPlainProducts);
+glazedFilterBtn.addEventListener('click', filterGlazedProducts);
+sugarFilterBtn.addEventListener('click', filterSugarProducts);
+
+//Filterfunktioner - Uppdaterar filteredProducts och renderar produkterna
+
+// Visar alla produkter igen
+function showAllProducts() {
+  filteredProducts = Array.from(products);
+  renderProducts();
+}
+
+// Filtrerar vanliga munkar
+function filterPlainProducts() {
+  filteredProducts = products.filter(
+    product => product.category === 'plain'
+  );
+  renderProducts();
+}
+
+// Filtrerar glaserade munkar
+function filterGlazedProducts() {
+  filteredProducts = products.filter(
+    product => product.category === 'glazed'
+  );
+  renderProducts();
+}
+
+// Filtrerar sockermunkar
+function filterSugarProducts() {
+  filteredProducts = products.filter(
+    product => product.category === 'sugar'
+  );
+  renderProducts();
+}
+
+
+// -------------------------------------------------------
+// ----------------------Renderfunktion ------------------
+// -------------------------------------------------------
+
+function renderProducts() {
+  // Töm tidigare innehåll
+  productsListing.innerHTML = '';
+
+  // Loopa igenom listan som ska visas
+  filteredProducts.forEach(product => {
+    const html = `
+      <article>
+        <h3>${product.name}</h3>
+        <p>Pris: ${product.price} kr</p>
+        <p>Betyg: ${product.rating}/5</p>
+        <p>Kategori: ${product.category}</p>
+      </article>
+    `;
+
+    // Lägg till HTML i containern
+    productsListing.innerHTML += html;
+  });
+
+  renderProducts();
 }

@@ -34,7 +34,7 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
    - skicka hela products-arrayen till renderProducts
 */
 
-import '/style.scss';
+import './style.scss';
 
 
 const plainMunk = {
@@ -46,7 +46,7 @@ const plainMunk = {
 };
 
 const plainMunk6Pack = {
-  name: "Vanlig Munk 3-pack",
+  name: "Vanlig Munk 6-pack",
   price: 100,
   rating: 4,
   category: "plain",

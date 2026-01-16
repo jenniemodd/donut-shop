@@ -32,6 +32,8 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
 
 7. Vid klick på "visa alla":
    - skicka hela products-arrayen till renderProducts
+
+8.
 */
 
 import '/style.scss';
@@ -155,7 +157,9 @@ plainFilterBtn.addEventListener('click', filterPlainProducts);
 glazedFilterBtn.addEventListener('click', filterGlazedProducts);
 sugarFilterBtn.addEventListener('click', filterSugarProducts);
 
-//Filterfunktioner - Uppdaterar filteredProducts och renderar produkterna
+// -------------------------------------------------------
+// ----------------------Filterfunktioner-----------------
+// ---Uppdaterar filteredProducts och renderar produkterna
 
 // Visar alla produkter igen
 function showAllProducts() {

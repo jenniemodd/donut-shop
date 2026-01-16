@@ -7,3 +7,10 @@ h1 {
   font-style: italic;
   font-family: 'Lucida Sans', sans-serif;
 }
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+

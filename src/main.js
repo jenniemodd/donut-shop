@@ -33,7 +33,16 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
 7. Vid klick på "visa alla":
    - skicka hela products-arrayen till renderProducts
 
-8.
+8. Skapa knappar för sorteringsfunktion i HTML;
+-Namn
+-Pris
+-Betyg
+-Kategori
+
+9.För varje klick på sorteringsknapparna så ska produkterna sorteras i stigande ordning baserat på vald sorteringsmetod.
+   - Lägg till event listeners på sorteringsknappar
+   -Sortera filteredProducts baserat på vald metod (Namn, pris, katergori och betyg)
+   -Användaren ska kunna filtera och sortera samtidigt.
 */
 
 import '/style.scss';

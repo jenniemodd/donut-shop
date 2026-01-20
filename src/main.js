@@ -163,6 +163,9 @@ const products = [
   sugarMunk6Pack
 ];
 
+const cart = []
+
+
 // -------------------------------------------------------
 // -----------Container där produkterna visas ------------
 // -------------------------------------------------------
@@ -305,6 +308,23 @@ function sortByCategory() {
  renderProducts();
 }
 
+/// -------------------------------------------------------
+// ----------------------Lägg till i varukorg --------------
+// -------------------------------------------------------
+
+function addProductToCart(e) {
+  const clickedId = Number(e.target.dataset.id);
+
+  const product = products.find(product => product.id === clickedId);
+
+  if (!product) return;
+
+  cart.push(product);
+
+  console.log(cart);
+}
+
+
 
 // -------------------------------------------------------
 // ----------------------Renderfunktion ------------------
@@ -329,7 +349,14 @@ function renderProducts() {
 
     // Lägg till HTML i containern
     productsListing.innerHTML += html;
-  });
-}
 
+  });
+
+// Lägg till eventlyssnare på köpknappen
+const buyButtons = document.querySelectorAll('.buy');
+buyButtons.forEach(button => {  
+button.addEventListener('click', addProductToCart);
+ });
+
+}
   renderProducts();

@@ -13,7 +13,7 @@ Varje produkt ska innehålla:
 Skapa minst 10 produkter
 Tilldela varje produkt en kategori:
 - plain
-- chocolate
+- glazed
 - sugar
 
 Spara alla produkter i en gemensam produktlista

@@ -59,7 +59,7 @@ const plainMunk = {
 const plainMunk6Pack = {
   name: "Vanlig Munk 6-pack",
   price: 100,
-  rating: 4,
+  rating: 3.8,
   category: "plain",
   image: "images/plain-munk.jpg"
 };
@@ -67,7 +67,7 @@ const plainMunk6Pack = {
 const plainMunk3Pack = {
   name: "Vanlig Munk 3-pack",
   price: 100,
-  rating: 4,
+  rating: 3.9,
   category: "plain",
   image: "images/plain-munk.jpg"
 };
@@ -89,7 +89,7 @@ const glazedMunkblueberry = {
   image: "images/blueberry-munk.jpg"
 };
 
-const glazedMunkrasberry = {
+const glazedMunkraspberry = {
   name: "Hallon Munk",
   price: 45,
   rating: 3.8,
@@ -125,7 +125,7 @@ const sugarMunk6Pack = {
 const sugarMunk3Pack = {
   name: "Socker Munk 3-pack",
   price: 80,
-  rating: 4,
+  rating: 3.5,
   category: "sugar",
   image: "images/sugar-munk.jpg"
 };
@@ -136,7 +136,7 @@ const products = [
   plainMunk6Pack,
   glazedMunk,
   glazedMunkblueberry,
-  glazedMunkrasberry,
+  glazedMunkraspberry,
   glazedMunkstrawberry,
   sugarMunk,
   sugarMunk3Pack,

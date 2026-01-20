@@ -49,6 +49,7 @@ import '/style.scss';
 
 
 const plainMunk = {
+    id: 1,
   name: "Vanlig Munk",
   price: 40,
   rating: 4,
@@ -58,6 +59,7 @@ const plainMunk = {
 };
 
 const plainMunk6Pack = {
+    id: 2,
   name: "Vanlig Munk 6-pack",
   price: 100,
   rating: 3.8,
@@ -67,6 +69,7 @@ const plainMunk6Pack = {
 };
 
 const plainMunk3Pack = {
+    id: 3,
   name: "Vanlig Munk 3-pack",
   price: 100,
   rating: 3.9,
@@ -77,6 +80,7 @@ const plainMunk3Pack = {
 
 
 const glazedMunkchocolate = {
+    id: 4,
   name: "Chocklad Munk",
   price: 45,
   rating: 4.5,
@@ -86,6 +90,7 @@ const glazedMunkchocolate = {
 };
 
 const glazedMunkblueberry = {
+    id: 5,
   name: "Blåbär Munk",
   price: 45,
   rating: 4,
@@ -95,6 +100,7 @@ const glazedMunkblueberry = {
 };
 
 const glazedMunkraspberry = {
+    id: 6,
   name: "Hallon Munk",
   price: 45,
   rating: 3.8,
@@ -104,6 +110,7 @@ const glazedMunkraspberry = {
 };
 
 const glazedMunkstrawberry = {
+    id: 7,
   name: "Jordgubb Munk",
   price: 45,
   rating: 4.3,
@@ -114,6 +121,7 @@ const glazedMunkstrawberry = {
 
 
 const sugarMunk = {
+    id: 8,
   name: "Socker Munk",
   price: 35,
   rating: 4.2,
@@ -123,6 +131,7 @@ const sugarMunk = {
 };
 
 const sugarMunk6Pack = {
+    id: 9,
   name: "Socker Munk 6-pack",
   price: 180,
   rating: 4,
@@ -132,6 +141,7 @@ const sugarMunk6Pack = {
 };
 
 const sugarMunk3Pack = {
+    id: 10,
   name: "Socker Munk 3-pack",
   price: 80,
   rating: 3.5,

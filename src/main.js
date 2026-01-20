@@ -53,7 +53,8 @@ const plainMunk = {
   price: 40,
   rating: 4,
   category: "plain",
-  image: "images/plain-munk.jpg"
+  image: "content/vanligmunk.jpg",
+  alt: "Bild på en vanlig munk"
 };
 
 const plainMunk6Pack = {
@@ -61,7 +62,8 @@ const plainMunk6Pack = {
   price: 100,
   rating: 3.8,
   category: "plain",
-  image: "images/plain-munk.jpg"
+  image: "content/vanligmunk6pack.jpg",
+  alt: "Bild på 6 vanliga munkar"
 };
 
 const plainMunk3Pack = {
@@ -69,16 +71,18 @@ const plainMunk3Pack = {
   price: 100,
   rating: 3.9,
   category: "plain",
-  image: "images/plain-munk.jpg"
+  image: "content/vanligmunk3pack.jpg",
+  alt: "Bild på tre vanliga munkar"
 };
 
 
-const glazedMunk = {
-  name: "Glaserad Munk",
+const glazedMunkchocolate = {
+  name: "Chocklad Munk",
   price: 45,
   rating: 4.5,
   category: "glazed",
-  image: "images/chocholate-munk.jpg"
+  image: "content/chockladmunk.jpg",
+  alt: "Bild på en chokladmunk"
 };
 
 const glazedMunkblueberry = {
@@ -86,7 +90,8 @@ const glazedMunkblueberry = {
   price: 45,
   rating: 4,
   category: "glazed",
-  image: "images/blueberry-munk.jpg"
+  image: "content/blabarsmunk.jpg",
+  alt: "Bild på en blåbärsmunk"
 };
 
 const glazedMunkraspberry = {
@@ -94,7 +99,8 @@ const glazedMunkraspberry = {
   price: 45,
   rating: 3.8,
   category: "glazed",
-  image: "images/blueberry-munk.jpg"
+  image: "content/hallonmunk.jpg",
+  alt: "Bild på en hallonmunk"
 };
 
 const glazedMunkstrawberry = {
@@ -102,7 +108,8 @@ const glazedMunkstrawberry = {
   price: 45,
   rating: 4.3,
   category: "glazed",
-  image: "images/strawberry-munk.jpg"
+  image: "content/jordgubbmunk.jpg",
+  alt: "Bild på en jordgubbsmunk"
 };
 
 
@@ -111,7 +118,8 @@ const sugarMunk = {
   price: 35,
   rating: 4.2,
   category: "sugar",
-  image: "images/sugar-munk.jpg"
+  image: "content/sockradmunk.jpg",
+  alt: "Bild på en sockermunk"
 };
 
 const sugarMunk6Pack = {
@@ -119,7 +127,8 @@ const sugarMunk6Pack = {
   price: 180,
   rating: 4,
   category: "sugar",
-  image: "images/sugar-munk.jpg"
+  image: "content/sockradmunk6pack.jpg",
+  alt: "Bild på 6 sockermunkar"
 };
 
 const sugarMunk3Pack = {
@@ -127,14 +136,15 @@ const sugarMunk3Pack = {
   price: 80,
   rating: 3.5,
   category: "sugar",
-  image: "images/sugar-munk.jpg"
+  image: "content/sockradmunk3pack.jpg",
+  alt: "Bild på 3 sockermunkar"
 };
 
 const products = [
      plainMunk,
   plainMunk3Pack,
   plainMunk6Pack,
-  glazedMunk,
+  glazedMunkchocolate,
   glazedMunkblueberry,
   glazedMunkraspberry,
   glazedMunkstrawberry,

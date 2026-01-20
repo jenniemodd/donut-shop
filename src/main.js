@@ -212,6 +212,31 @@ function filterSugarProducts() {
 
 
 // -------------------------------------------------------
+// ----------- TEST: Dropdown-filter ---------------------
+// -------------------------------------------------------
+
+const filterSelect = document.querySelector('#filterSelect');
+console.log(filterSelect);
+
+filterSelect.addEventListener('change', handleDropdownFilter);
+
+function handleDropdownFilter() {
+  const selectedCategory = filterSelect.value;
+
+  if (selectedCategory === 'all') {
+    filteredProducts = Array.from(products);
+  } else {
+    filteredProducts = products.filter(
+      product => product.category === selectedCategory
+    );
+  }
+
+  renderProducts();
+}
+
+
+
+// -------------------------------------------------------
 // ----------------------Sorteringsfunktion --------------
 // -------------------------------------------------------
 

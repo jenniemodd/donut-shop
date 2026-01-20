@@ -108,7 +108,7 @@ const glazedMunkstrawberry = {
   price: 45,
   rating: 4.3,
   category: "glazed",
-  image: "content/jordgubbmunk.jpg",
+  image: "content/jordgubbsmunk.jpg",
   alt: "Bild på en jordgubbsmunk"
 };
 
@@ -282,7 +282,8 @@ function renderProducts() {
   // Loopa igenom listan som ska visas
   filteredProducts.forEach(product => {
     const html = `
-      <article>
+      <article class="product-card">
+      <img src="${product.image}" alt="${product.alt}">
         <h3>${product.name}</h3>
         <p>Pris: ${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>

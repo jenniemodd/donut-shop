@@ -342,7 +342,6 @@ function renderProducts() {
         <h3>${product.name}</h3>
         <p>Pris: ${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>
-        <p>Kategori: ${product.category}</p>
         <button class="buy" data-id="${product.id}">Lägg i varukorg</button>
       </article>
     `;

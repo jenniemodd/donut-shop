@@ -174,56 +174,15 @@ const productsListing = document.querySelector('#products');
 const sortSelect = document.querySelector('#sortSelect');
 
 
-// -------------------------------------------------------
-// ----------------------Filterknappar -------------------
-// -------------------------------------------------------
-const allFilterBtn = document.querySelector('#allTypes');
-const plainFilterBtn = document.querySelector('#plain');
-const glazedFilterBtn = document.querySelector('#glazed');
-const sugarFilterBtn = document.querySelector('#sugar');
-
 let filteredProducts = Array.from(products); // Filtrerad lista
 
 // Eventlyssnare (Knapp lyssnar efter klick)
 
-allFilterBtn.addEventListener('click', showAllProducts);
-plainFilterBtn.addEventListener('click', filterPlainProducts);
-glazedFilterBtn.addEventListener('click', filterGlazedProducts);
-sugarFilterBtn.addEventListener('click', filterSugarProducts);
 
 // -------------------------------------------------------
 // ----------------------Filterfunktioner-----------------
 // ---Uppdaterar filteredProducts och renderar produkterna
 
-// Visar alla produkter igen
-function showAllProducts() {
-  filteredProducts = Array.from(products);
-  renderProducts();
-}
-
-// Filtrerar vanliga munkar
-function filterPlainProducts() {
-  filteredProducts = products.filter(
-    product => product.category === 'plain'
-  );
-  renderProducts();
-}
-
-// Filtrerar glaserade munkar
-function filterGlazedProducts() {
-  filteredProducts = products.filter(
-    product => product.category === 'glazed'
-  );
-  renderProducts();
-}
-
-// Filtrerar sockermunkar
-function filterSugarProducts() {
-  filteredProducts = products.filter(
-    product => product.category === 'sugar'
-  );
-  renderProducts();
-}
 
 
 // -------------------------------------------------------

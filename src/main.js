@@ -255,65 +255,10 @@ function handleDropdownFilter() {
 // ----------------------Sorteringsfunktion --------------
 // -------------------------------------------------------
 
-const sortByNameBtn = document.querySelector('#sortByName');
-const sortByPriceBtn = document.querySelector('#sortByPrice');
-const sortByRatingBtn = document.querySelector('#sortByRating');
-const sortByCategoryBtn = document.querySelector('#sortByCategory');
-
-
-// Eventlyssnare för sorteringsknappar
-sortByNameBtn.addEventListener("click", sortByName);
-sortByPriceBtn.addEventListener("click", sortByPrice);
-sortByRatingBtn.addEventListener("click", sortByRating);
-sortByCategoryBtn.addEventListener("click", sortByCategory);
-
 
 // Eventlyssnare för sorteringsdropdown
 sortSelect.addEventListener('change', handleSortChange);
 
-
-// Sorteringsfunktion
-
-
-function sortByName() {
- filteredProducts.sort((product1, product2) => {
-   if (product1.name < product2.name) {
-     return -1;
-   }
-   if (product1.name > product2.name) {
-     return 1;
-   }
-   return 0;
- });
- renderProducts();
-}
-
-function sortByPrice() {
- filteredProducts.sort((product1, product2) => {
-   return product1.price - product2.price;
- });
- renderProducts();
-}
-
-function sortByRating() {
- filteredProducts.sort((product1, product2) => {
-   return product2.rating - product1.rating;
- });
- renderProducts();
-}
-
-function sortByCategory() {
- filteredProducts.sort((product1, product2) => {
-   if (product1.category < product2.category) {
-     return -1;
-   }
-   if (product1.category > product2.category) {
-     return 1;
-   }
-   return 0;
- });
- renderProducts();
-}
 
 
 // Sorteringsfunktion Dropdown

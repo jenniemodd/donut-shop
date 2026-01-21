@@ -56,6 +56,12 @@ body {
     font-family: 'Changa One', sans-serif;
 }
 
+.product-card p {
+    margin: 5px 0;
+    color: black;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
   .site-header {
     flex-direction: column;

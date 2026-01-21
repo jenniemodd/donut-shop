@@ -33,12 +33,26 @@
   </select>
 </section>
 
+
+
+<!-----SORTERINGSKNAPPAR-->
+
 <div>
   <button id="sortByName">Namn (A-Z)</button>
   <button id="sortByPrice">Pris</button>
   <button id="sortByRating">Betyg</button>
   <button id="sortByCategory">Kategori</button>
 </div>
+
+
+<!-------TEST DROPDOWN PÅ SORTERING--->
+<label for="sortSelect">Sortera:</label>
+<select id="sortSelect">
+  <option value="name">Namn</option>
+  <option value="price">Pris (lågt → högt)</option>
+  <option value="rating">Betyg (högt → lågt)</option>
+  <option value="category">Kategori</option>
+</select>
 
 <section class="products-list" id="products">
   <!-- produkter visas här från js -->

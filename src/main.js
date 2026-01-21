@@ -171,6 +171,8 @@ const cart = []
 // -------------------------------------------------------
 
 const productsListing = document.querySelector('#products');
+const sortSelect = document.querySelector('#sortSelect');
+
 
 // -------------------------------------------------------
 // ----------------------Filterknappar -------------------
@@ -265,6 +267,11 @@ sortByPriceBtn.addEventListener("click", sortByPrice);
 sortByRatingBtn.addEventListener("click", sortByRating);
 sortByCategoryBtn.addEventListener("click", sortByCategory);
 
+
+// Eventlyssnare för sorteringsdropdown
+sortSelect.addEventListener('change', handleSortChange);
+
+
 // Sorteringsfunktion
 
 
@@ -307,6 +314,32 @@ function sortByCategory() {
  });
  renderProducts();
 }
+
+
+// Sorteringsfunktion Dropdown
+
+function handleSortChange() {
+  const sortValue = sortSelect.value;
+
+  if (sortValue === 'name') {
+    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (sortValue === 'price') {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  }
+
+  if (sortValue === 'rating') {
+    filteredProducts.sort((a, b) => b.rating - a.rating);
+  }
+
+  if (sortValue === 'category') {
+    filteredProducts.sort((a, b) => a.category.localeCompare(b.category));
+  }
+
+  renderProducts();
+}
+
 
 /// -------------------------------------------------------
 // ----------------------Lägg till i varukorg --------------

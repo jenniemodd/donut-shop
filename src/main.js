@@ -81,7 +81,7 @@ const plainMunk = {
 const plainMunk6Pack = {
     id: 2,
   name: "Vanlig Munk 6-pack",
-  price: 100,
+  price: 220,
   rating: 3.8,
   category: "plain",
   image: "content/vanligmunk6pack.jpg",
@@ -112,7 +112,7 @@ const glazedMunkchocolate = {
 const glazedMunkblueberry = {
     id: 5,
   name: "Blåbär Munk",
-  price: 45,
+  price: 50,
   rating: 4,
   category: "glazed",
   image: "content/blabarsmunk.jpg",
@@ -122,7 +122,7 @@ const glazedMunkblueberry = {
 const glazedMunkraspberry = {
     id: 6,
   name: "Hallon Munk",
-  price: 45,
+  price: 55,
   rating: 3.8,
   category: "glazed",
   image: "content/hallonmunk.jpg",
@@ -132,7 +132,7 @@ const glazedMunkraspberry = {
 const glazedMunkstrawberry = {
     id: 7,
   name: "Jordgubb Munk",
-  price: 45,
+  price: 60,
   rating: 4.3,
   category: "glazed",
   image: "content/jordgubbsmunk.jpg",

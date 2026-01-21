@@ -314,15 +314,49 @@ function sortByCategory() {
 
 function addProductToCart(e) {
   const clickedId = Number(e.target.dataset.id);
+  const input = document.querySelector(`#amount-${clickedId}`);
+  const amount = Number(input.value);
+
+  if (amount === 0) return;
 
   const product = products.find(product => product.id === clickedId);
-
   if (!product) return;
 
-  cart.push(product);
+  const index = cart.findIndex(item => item.id === clickedId);
 
+  if (index === -1) {
+    cart.push({ ...product, amount });
+  } else {
+    cart[index].amount += amount;
+  }
+
+  input.value = 0;
   console.log(cart);
 }
+
+
+// Funktion för att minska och öka antal produkter
+
+function increaseProductCount(e) {
+  const clickedId = e.target.dataset.id;
+  const input = document.querySelector(`#amount-${clickedId}`);
+
+  input.value = Number(input.value) + 1;
+}
+
+function decreaseProductCount(e) {
+  const clickedId = e.target.dataset.id;
+  const input = document.querySelector(`#amount-${clickedId}`);
+
+  if (Number(input.value) > 0) {
+    input.value = Number(input.value) - 1;
+  }
+}
+
+const buyButtons = document.querySelectorAll('.buy');
+buyButtons.forEach(btn => {
+  btn.addEventListener('click', addProductToCart);
+});
 
 
 
@@ -357,11 +391,10 @@ function renderProducts() {
         </article>
     `;
 
-  }
-
     // Lägg till HTML i containern
     productsListing.innerHTML += html;
 
+  });
 
 // Eventlyssnare för köpknappar
 const increaseButtons = document.querySelectorAll('.increase');
@@ -379,6 +412,7 @@ buyButtons.forEach(btn => {
   btn.addEventListener('click', addProductToCart);
 });
 
+  }
 
-}
+// Initial rendering av produkter
   renderProducts();

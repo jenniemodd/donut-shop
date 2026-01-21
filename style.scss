@@ -130,5 +130,17 @@ body {
   .site-header img {
     width: 120px;
   }
+
+.product-card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .controls {
+  display: flex;
+  justify-content: center;
+}
+
+
 }
 

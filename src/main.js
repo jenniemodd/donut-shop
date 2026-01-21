@@ -342,20 +342,43 @@ function renderProducts() {
         <h3>${product.name}</h3>
         <p>${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>
+        
+        <div class="amount-controls">
+        <button class="decrease" data-id="${product.id}">−</button>
+        <input 
+          type="number"
+          id="amount-${product.id}"
+          value="0"
+          disabled
+        >
+        <button class="increase" data-id="${product.id}">+</button>
+        </div>
         <button class="buy" data-id="${product.id}">Lägg i varukorg</button>
-      </article>
+        </article>
     `;
+
+  }
 
     // Lägg till HTML i containern
     productsListing.innerHTML += html;
 
-  });
 
-// Lägg till eventlyssnare på köpknappen
+// Eventlyssnare för köpknappar
+const increaseButtons = document.querySelectorAll('.increase');
+increaseButtons.forEach(btn => {
+  btn.addEventListener('click', increaseProductCount);
+});
+
+const decreaseButtons = document.querySelectorAll('.decrease');
+decreaseButtons.forEach(btn => {
+  btn.addEventListener('click', decreaseProductCount);
+});
+
 const buyButtons = document.querySelectorAll('.buy');
-buyButtons.forEach(button => {  
-button.addEventListener('click', addProductToCart);
- });
+buyButtons.forEach(btn => {
+  btn.addEventListener('click', addProductToCart);
+});
+
 
 }
   renderProducts();

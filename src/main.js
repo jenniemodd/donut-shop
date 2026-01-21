@@ -24,25 +24,45 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
    - skapa HTML för varje produkt
    - lägg till produkten i containern
 
-6. Lägg till event listeners på filterknappar:
-   - vid klick:
-       - hämta vald kategori
-       - filtrera products-arrayen
-       - skicka filtrerad lista till renderProducts
+6. Lägg till event listeners på filterdropdown:
+   - använd change
+    - hämta vald kategori
+    - filtrera products-arrayen
+    - skicka filtrerad lista till renderProducts
 
 7. Vid klick på "visa alla":
    - skicka hela products-arrayen till renderProducts
 
-8. Skapa knappar för sorteringsfunktion i HTML;
+8. Skapa en dropdown för sorteringsfunktion i HTML;
 -Namn
 -Pris
 -Betyg
 -Kategori
 
-9.För varje klick på sorteringsknapparna så ska produkterna sorteras i stigande ordning baserat på vald sorteringsmetod.
-   - Lägg till event listeners på sorteringsknappar
+9.För varje "change" på sorteringsknapparna så ska produkterna sorteras i stigande ordning baserat på vald sorteringsmetod.
+   - Lägg till event listener på sorteringsdropdown
    -Sortera filteredProducts baserat på vald metod (Namn, pris, katergori och betyg)
    -Användaren ska kunna filtera och sortera samtidigt.
+   -kör Render Products
+
+10. Skapa en tom array cart för varukorgen
+-Varukorgen ska innehålla de produkterna som användaren har valt.   
+
+10. Skapa + och - för atta öka och minska antal munkar.
+- Se till så att man inte kan få mer än 0 på minus (Så det inte blir -1)
+
+11. När användaren klickar på lägg i varukorg så ska:
+-man hämta produkterns id och antal
+-om antalet är 0 ska inget göras
+-Kolla om produkten finns i varukorgen:
+- om ja, öka antalet,
+- om nej, lägg till produkten i varukorgen
+
+12. Visa varukorg baserat på varukorgs arrayen. 
+-HTML uppdateras varje gång cart ändras. 
+
+
+
 */
 
 import '/style.scss';
@@ -173,24 +193,13 @@ const cart = []
 const productsListing = document.querySelector('#products');
 const sortSelect = document.querySelector('#sortSelect');
 
-
-let filteredProducts = Array.from(products); // Filtrerad lista
-
-// Eventlyssnare (Knapp lyssnar efter klick)
-
-
-// -------------------------------------------------------
-// ----------------------Filterfunktioner-----------------
-// ---Uppdaterar filteredProducts och renderar produkterna
-
-
-
-// -------------------------------------------------------
-// ----------- TEST: Dropdown-filter ---------------------
-// -------------------------------------------------------
-
+let filteredProducts = Array.from(products);
 const filterSelect = document.querySelector('#filterSelect');
-console.log(filterSelect);
+
+// -------------------------------------------------------
+// ----------- FILTRERA DROPDOWN -------------------------
+// -------------------------------------------------------
+
 
 filterSelect.addEventListener('change', handleDropdownFilter);
 
@@ -209,7 +218,6 @@ function handleDropdownFilter() {
 }
 
 
-
 // -------------------------------------------------------
 // ----------------------Sorteringsfunktion --------------
 // -------------------------------------------------------
@@ -217,7 +225,6 @@ function handleDropdownFilter() {
 
 // Eventlyssnare för sorteringsdropdown
 sortSelect.addEventListener('change', handleSortChange);
-
 
 
 // Sorteringsfunktion Dropdown

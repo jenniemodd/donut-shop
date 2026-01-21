@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: white
+  background-color: white;
 }
 
 .site-header {
@@ -64,7 +64,7 @@ body {
 
 .filter-button {
   appearance: none;
-  background-color: turquoise;
+  background-color: var(--turquoise);
   color: black;
   padding: 0.7rem 2rem;
   border-radius: 25px;
@@ -75,7 +75,7 @@ body {
 
 .sort-button {
   appearance: none;
-  background-color: turquoise;
+  background-color: var(--turquoise);
   color: black;
   padding: 0.7rem 1rem;
   border-radius: 25px;
@@ -83,6 +83,26 @@ body {
   border: none;
   font-family: 'Jost', sans-serif;
 }
+
+.amount-controls button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  background-color: var(--turquoise);
+  color: white;
+}
+
+.product-card .buy {
+  background-color: var(--dark-green);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 25px;
+  border: none;
+}
+
+
+
 
 
 @media (max-width: 768px) {

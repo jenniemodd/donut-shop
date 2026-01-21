@@ -62,6 +62,25 @@ body {
     font-size: 0.9rem;
 }
 
+.filter-button {
+  appearance: none;
+  background-color: turquoise;
+  color: black;
+  padding: 0.7rem 2rem;
+  border-radius: 25px;
+  text-align: center;
+  border: none;
+}
+
+.sort-button {
+  appearance: none;
+  background-color: turquoise;
+  color: black;
+  padding: 0.7rem 1rem;
+  border-radius: 25px;
+  text-align: center;
+  border: none;
+}
 
 
 @media (max-width: 768px) {

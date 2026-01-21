@@ -196,6 +196,7 @@ const sortSelect = document.querySelector('#sortSelect');
 let filteredProducts = Array.from(products);
 const filterSelect = document.querySelector('#filterSelect');
 
+
 // -------------------------------------------------------
 // ----------- FILTRERA DROPDOWN -------------------------
 // -------------------------------------------------------

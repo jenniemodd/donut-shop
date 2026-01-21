@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FED25D | Inlämningsuppgift 1</title>
+    <title>Gottfrids Munkar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Changa+One:ital@0;1&family=Fira+Code:wght@300..700&family=Lilita+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oi&display=swap" rel="stylesheet">
@@ -20,11 +20,10 @@
 
 <!-- TEST DROPDOWN PÅ FILTER -->
  <section class="controls">
-  <div class="filter">
-  
-  
-  <label for="filterSelect">Filtrera</label>
-  <select id="filterSelect">
+
+  <label for="filterSelect" class="sr-only"></label>
+  <select id="filterSelect" class="filter-button">
+    <option value="" selected disabled hidden>Filtrera</option>
     <option value="all">Alla</option>
     <option value="plain">Vanlig</option>
     <option value="glazed">Glasyr</option>
@@ -34,17 +33,15 @@
 
 <!-------TEST DROPDOWN PÅ SORTERING--->
 
-<section class="sort">
-  <div class="sort">
-<label for="sortSelect">Sortera:</label>
-<select id="sortSelect">
+
+<label for="sortSelect"></label>
+<select id="sortSelect" class="sort-button">
+  <option value="" selected disabled hidden>Sortera</option>
   <option value="name">Namn</option>
   <option value="price">Pris (lågt → högt)</option>
   <option value="rating">Betyg (högt → lågt)</option>
   <option value="category">Kategori</option>
 </select>
-</div>
-</section>
 </section>
 
 <section class="products-list" id="products">

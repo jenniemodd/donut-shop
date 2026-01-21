@@ -340,7 +340,7 @@ function renderProducts() {
       <article class="product-card">
       <img src="${product.image}" alt="${product.alt}">
         <h3>${product.name}</h3>
-        <p>Pris: ${product.price} kr</p>
+        <p>${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>
         <button class="buy" data-id="${product.id}">Lägg i varukorg</button>
       </article>

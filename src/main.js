@@ -318,19 +318,20 @@ function renderProducts() {
     const html = `
       <article class="product-card">
       <img src="${product.image}" alt="${product.alt}">
-        <h3>${product.name}</h3>
+        <h2>${product.name}</h2>
         <p>${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>
         
         <div class="amount-controls">
-        <button class="decrease" data-id="${product.id}">−</button>
+        <button class="decrease" data-id="${product.id}" aria-label="Öka antal">−</button>
         <input 
           type="number"
           id="amount-${product.id}"
           value="0"
           disabled
+          aria-label="Antal ${product.name}"
         >
-        <button class="increase" data-id="${product.id}">+</button>
+        <button class="increase" data-id="${product.id}" aria-label="Öka antal">+</button>
         </div>
         <button class="buy" data-id="${product.id}">Lägg i varukorg</button>
         </article>

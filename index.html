@@ -24,21 +24,21 @@
 >
   <img
     src="content/shopping_cart.svg"
-    alt="varukorg"
+    alt=""
     aria-hidden="true"
   >
 <span class="cart-count">0</span>
 </button>
 
 <section id="cart" class="cart hidden">
-  <h2>Varukorg</h2>
+  <h2 id="cart-heading" class="sr-only">Varukorg</h2>
 
-  <div class="cart-items">
-    <!-- produkter -->
+  <div id="cart items" class="cart-items">
+    <!-- produkter från js -->
   </div>
 
   <p class="cart-total">
-    Totalt: <span>0 kr</span>
+    Totalt: <span id="cart-totalt">0 kr</span>
   </p>
 </section>
 </section>

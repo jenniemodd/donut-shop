@@ -259,10 +259,13 @@ function handleSortChange() {
 
 function addProductToCart(e) {
   const clickedId = Number(e.target.dataset.id);
-  const input = document.querySelector(`#amount-${clickedId}`);
-  const amount = Number(input.value);
 
-  if (amount === 0) return;
+  // Hämta inputfältet för rätt produkt
+  const inputField = document.querySelector(`#amount-${clickedId}`);
+  const amount = Number(inputField.value);
+
+  // Validering: inget negativt eller noll
+  if (amount <= 0) return;
 
   const product = products.find(product => product.id === clickedId);
   if (!product) return;
@@ -275,9 +278,12 @@ function addProductToCart(e) {
     cart[index].amount += amount;
   }
 
-  input.value = 0;
+  // Återställ input-fältets värde till 0 efter tryck på köp-knappen
+  inputField.value = 0;
+  
   console.log(cart);
 }
+
 
 
 // Funktion för att minska och öka antal produkter

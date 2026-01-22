@@ -318,7 +318,7 @@ function renderProducts() {
     const html = `
       <article class="product-card">
       <img src="${product.image}" alt="${product.alt}">
-        <h2>${product.name}</h2>
+        <h3>${product.name}</h3>
         <p>${product.price} kr</p>
         <p>Betyg: ${product.rating}/5</p>
         

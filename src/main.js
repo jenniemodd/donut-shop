@@ -299,10 +299,7 @@ function addProductToCart(e) {
 
 const cartTotalEl = document.querySelector('#cart-total');
 function updateCartTotals() {
-  // Kolla vilka produkter vi har i varukorgen (loopa igenom)
-  // Kolla priset
-  // Gångra priset med antalet
-  // Plussa ihop alla varors totalpris till en totalsumma för hela varukorgen
+
 
   let cartTotal = 0;
 
@@ -310,12 +307,6 @@ function updateCartTotals() {
     const productSum = cart[i].price * cart[i].amount;
     cartTotal += productSum;
   }
-
-  // Reduce => inbyggd funktion i JS för att summera en array
-  // Gör samma som for-loopen här ovan
-  /*const cartTotal = cart.reduce((partialSum, product) => {
-    return partialSum + (product.price * product.amount);
-  }, 0);*/
 
   cartTotalEl.innerHTML = `${cartTotal} kr`;
 

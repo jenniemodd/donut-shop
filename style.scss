@@ -162,10 +162,26 @@ body {
 }
 
 
+.cart .decrease-cart,
+.cart .increase-cart {
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+  background-color: var(--turquoise);
+  color: white;
+  border: none;
+
+  font-size: 1rem;
+  align-items: center;
+}
+
+
 @media (max-width: 768px) {
-  .site-header {
-    flex-direction: column;
-    gap: 0.5rem;
+   .site-header {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
   }
 
   .site-header h1 {
@@ -200,6 +216,22 @@ body {
     padding: 1rem;
     overflow-y: auto;
   }
+
+
+.cart-wrapper {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
+  .cart-total {
+    text-align: right;
+  }
 
+  .cart-items {
+  text-align: right;
+
+}
+
+}

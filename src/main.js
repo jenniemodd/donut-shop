@@ -327,7 +327,7 @@ function updateCartTotals() {
 // -------------------------------------------------------------
 
 
-// Funktion Öka och minska produkter i varukorgen
+// Funktion Öka och minska produkter i varukorgen (rendering) 
 
 
 function renderCart() {
@@ -348,7 +348,7 @@ function renderCart() {
   });
 
 
-  // Koppla knapparna för ovan funktion i varukorgen
+// Eventlyssnare för ovan funktion
 
   const increaseBtns = document.querySelectorAll('.increase-cart');
 increaseBtns.forEach(btn =>
@@ -366,7 +366,7 @@ removeBtns.forEach(btn =>
 );
 
 
-// Öka 
+// Öka funktion
 
 function increaseProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -381,7 +381,7 @@ function increaseProductFromCart(e) {
 }
 
 
-// minska 
+// minska funktion
 
 function decreaseProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -396,7 +396,7 @@ function decreaseProductFromCart(e) {
   updateCartTotals();
 }
 
-// Ta bort
+// Ta bort funktion
 
 function removeProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -413,7 +413,7 @@ function removeProductFromCart(e) {
 }
 
 
-// Funktion för att minska och öka antal produkter
+// Funktion för att minska och öka antal produkter på produkter
 
 function increaseProductCount(e) {
   const clickedId = e.target.dataset.id;

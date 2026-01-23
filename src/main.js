@@ -197,6 +197,8 @@ let filteredProducts = Array.from(products);
 const filterSelect = document.querySelector('#filterSelect');
 
 const cartCountEl = document.querySelector('.cart-count');
+const cartItemsEl = document.querySelector('.cart-items');
+
 
 
 
@@ -292,7 +294,7 @@ function addProductToCart(e) {
   renderCart();
 }
 
-// ------------------TEST KOD ---------------------------------
+// ------------------TEST KOD CART TOTAL -----------------------
 
 
 const cartTotalEl = document.querySelector('#cart-total');
@@ -323,6 +325,92 @@ function updateCartTotals() {
 }
 
 // -------------------------------------------------------------
+
+
+// Funktion Öka och minska produkter i varukorgen
+
+
+function renderCart() {
+  cartItemsEl.innerHTML = '';
+
+  cart.forEach(product => {
+    cartItemsEl.innerHTML += `
+      <article class="cart-item">
+        <p>${product.name}</p>
+
+        <button class="decrease-cart" data-id="${product.id}">−</button>
+        <span>${product.amount}</span>
+        <button class="increase-cart" data-id="${product.id}">+</button>
+
+        <button class="remove-cart" data-id="${product.id}">Ta bort</button>
+      </article>
+    `;
+  });
+
+
+  // Koppla knapparna för ovan funktion i varukorgen
+
+  const increaseBtns = document.querySelectorAll('.increase-cart');
+increaseBtns.forEach(btn =>
+  btn.addEventListener('click', increaseProductFromCart)
+);
+
+const decreaseBtns = document.querySelectorAll('.decrease-cart');
+decreaseBtns.forEach(btn =>
+  btn.addEventListener('click', decreaseProductFromCart)
+);
+
+const removeBtns = document.querySelectorAll('.remove-cart');
+removeBtns.forEach(btn =>
+  btn.addEventListener('click', removeProductFromCart)
+);
+
+
+// Öka 
+
+function increaseProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+  const product = cart.find(item => item.id === id);
+
+  if (!product) return;
+
+  product.amount += 1;
+
+  renderCart();
+  updateCartTotals();
+}
+
+
+// minska 
+
+function decreaseProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+  const product = cart.find(item => item.id === id);
+
+  if (!product) return;
+  if (product.amount <= 1) return;
+
+  product.amount -= 1;
+
+  renderCart();
+  updateCartTotals();
+}
+
+// Ta bort
+
+function removeProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+
+  const index = cart.findIndex(item => item.id === id);
+  if (index === -1) return;
+
+  cart.splice(index, 1);
+
+  renderCart();
+  updateCartTotals();
+}
+
+}
 
 
 // Funktion för att minska och öka antal produkter

@@ -292,6 +292,7 @@ function addProductToCart(e) {
    updateCartTotals();
 
   renderCart();
+  animateCart();
 }
 
 // ------------------TEST KOD CART TOTAL -----------------------
@@ -316,6 +317,19 @@ function updateCartTotals() {
 }
 
 // -------------------------------------------------------------
+
+
+// ---------------------Test kod Animation varukorg ------------
+
+const cartWrapper = document.querySelector('.cart-wrapper');
+
+function animateCart() {
+  cartWrapper.classList.add('animate');
+
+  setTimeout(() => {
+    cartWrapper.classList.remove('animate');
+  }, 300);
+}
 
 
 // Funktion Öka och minska produkter i varukorgen (rendering) 

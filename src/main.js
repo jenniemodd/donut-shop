@@ -196,6 +196,9 @@ const sortSelect = document.querySelector('#sortSelect');
 let filteredProducts = Array.from(products);
 const filterSelect = document.querySelector('#filterSelect');
 
+const cartCountEl = document.querySelector('.cart-count');
+
+
 
 // -------------------------------------------------------
 // ----------- FILTRERA DROPDOWN -------------------------
@@ -278,12 +281,48 @@ function addProductToCart(e) {
     cart[index].amount += amount;
   }
 
+
   // Återställ input-fältets värde till 0 efter tryck på köp-knappen
   inputField.value = 0;
   
   console.log(cart);
+
+   updateCartTotals();
+
+  printCart();
 }
 
+// ------------------TEST KOD ---------------------------------
+
+
+const cartTotalEl = document.querySelector('#cart-total');
+function updateCartTotals() {
+  // Kolla vilka produkter vi har i varukorgen (loopa igenom)
+  // Kolla priset
+  // Gångra priset med antalet
+  // Plussa ihop alla varors totalpris till en totalsumma för hela varukorgen
+
+  let cartTotal = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    const productSum = cart[i].price * cart[i].amount;
+    cartTotal += productSum;
+  }
+
+  // Reduce => inbyggd funktion i JS för att summera en array
+  // Gör samma som for-loopen här ovan
+  /*const cartTotal = cart.reduce((partialSum, product) => {
+    return partialSum + (product.price * product.amount);
+  }, 0);*/
+
+  cartTotalEl.innerHTML = `${cartTotal} kr`;
+
+  console.log(cartTotalEl);
+
+
+}
+
+// -------------------------------------------------------------
 
 
 // Funktion för att minska och öka antal produkter

@@ -289,7 +289,7 @@ function addProductToCart(e) {
 
    updateCartTotals();
 
-  printCart();
+  renderCart();
 }
 
 // ------------------TEST KOD ---------------------------------

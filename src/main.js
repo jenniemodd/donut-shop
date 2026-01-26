@@ -198,6 +198,9 @@ const filterSelect = document.querySelector('#filterSelect');
 
 const cartCountEl = document.querySelector('.cart-count');
 const cartItemsEl = document.querySelector('.cart-items');
+const cartToggle = document.querySelector('.cart-toggle');
+const cartEl = document.querySelector('#cart');
+const closeCartBtn = document.querySelector('.close-cart');
 
 
 

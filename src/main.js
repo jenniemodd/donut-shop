@@ -208,6 +208,8 @@ const checkoutToggleBtn = document.querySelector('#checkoutToggle');
 const checkoutFormWrapper = document.querySelector('#checkoutFormWrapper');
 const cartWrapper = document.querySelector('.cart-wrapper');
 const cartTotalEl = document.querySelector('#cart-total');
+const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
+
 
 
 
@@ -225,6 +227,7 @@ function updateCartTotals() {
   });
 
   cartTotalEl.textContent = `${total} kr`;
+  cartSummaryTotalEl.textContent = `${total} kr`;
 }
 
 // Liten animation när något läggs i varukorgen

@@ -120,6 +120,13 @@ body {
   margin-bottom: 1rem;
 }
 
+
+.hidden {
+  display: none;
+}
+
+
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -187,6 +194,8 @@ body {
   padding: 1rem;
   z-index: 1000;
 }
+
+
 
 
 

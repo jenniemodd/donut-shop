@@ -185,32 +185,36 @@ const products = [
 
 const cart = []
 
+let filteredProducts = Array.from(products);
 
 // -------------------------------------------------------
 // -----------Container där produkterna visas ------------
 // -------------------------------------------------------
 
 const productsListing = document.querySelector('#products');
-const sortSelect = document.querySelector('#sortSelect');
 
-let filteredProducts = Array.from(products);
+// filter och sortering
+
+const sortSelect = document.querySelector('#sortSelect');
 const filterSelect = document.querySelector('#filterSelect');
 
+// varukorg
 const cartCountEl = document.querySelector('.cart-count');
 const cartItemsEl = document.querySelector('.cart-items');
 const cartToggle = document.querySelector('.cart-toggle');
 const cartEl = document.querySelector('#cart');
 const closeCartBtn = document.querySelector('.close-cart');
+const checkoutToggleBtn = document.querySelector('#checkoutToggle');
+const checkoutFormWrapper = document.querySelector('#checkoutFormWrapper');
 
 
 
 
 // -------------------------------------------------------
+// ----------------------FUNKTIONER ----------------------
+// -------------------------------------------------------
+
 // ----------- FILTRERA DROPDOWN -------------------------
-// -------------------------------------------------------
-
-
-filterSelect.addEventListener('change', handleDropdownFilter);
 
 function handleDropdownFilter() {
   const selectedCategory = filterSelect.value;
@@ -227,16 +231,7 @@ function handleDropdownFilter() {
 }
 
 
-// -------------------------------------------------------
-// ----------------------Sorteringsfunktion --------------
-// -------------------------------------------------------
-
-
-// Eventlyssnare för sorteringsdropdown
-sortSelect.addEventListener('change', handleSortChange);
-
-
-// Sorteringsfunktion Dropdown
+// ------------SORTERA DROPDOWN --------------------------
 
 function handleSortChange() {
   const sortValue = sortSelect.value;
@@ -261,9 +256,7 @@ function handleSortChange() {
 }
 
 
-/// -------------------------------------------------------
-// ----------------------Lägg till i varukorg --------------
-// -------------------------------------------------------
+// ----------------------VARUKORG --------------------------
 
 function addProductToCart(e) {
   const clickedId = Number(e.target.dataset.id);
@@ -286,19 +279,7 @@ function addProductToCart(e) {
     cart[index].amount += amount;
   }
 
-
-  // Återställ input-fältets värde till 0 efter tryck på köp-knappen
-  inputField.value = 0;
-  
-  console.log(cart);
-
-   updateCartTotals();
-
-  renderCart();
-  animateCart();
-}
-
-// ------------------TEST KOD CART TOTAL -----------------------
+  // ------------------CART TOTAL -----------------------
 
 
 const cartTotalEl = document.querySelector('#cart-total');
@@ -319,10 +300,19 @@ function updateCartTotals() {
 
 }
 
-// -------------------------------------------------------------
 
+  // Återställ input-fältets värde till 0 efter tryck på köp-knappen
+  inputField.value = 0;
+  
+  console.log(cart);
 
-// ---------------------Test kod Animation varukorg ------------
+   updateCartTotals();
+
+  renderCart();
+  animateCart();
+}
+
+// ---------------------ANIMATION CART ------------
 
 const cartWrapper = document.querySelector('.cart-wrapper');
 
@@ -334,8 +324,7 @@ function animateCart() {
   }, 300);
 }
 
-
-// Funktion Öka och minska produkter i varukorgen (rendering) 
+// ------------ÖKA MINSKA PRODUKTER VARUKORG--------
 
 
 function renderCart() {
@@ -355,26 +344,7 @@ function renderCart() {
     `;
   });
 
-
-// Eventlyssnare för ovan funktion
-
-  const increaseBtns = document.querySelectorAll('.increase-cart');
-increaseBtns.forEach(btn =>
-  btn.addEventListener('click', increaseProductFromCart)
-);
-
-const decreaseBtns = document.querySelectorAll('.decrease-cart');
-decreaseBtns.forEach(btn =>
-  btn.addEventListener('click', decreaseProductFromCart)
-);
-
-const removeBtns = document.querySelectorAll('.remove-cart');
-removeBtns.forEach(btn =>
-  btn.addEventListener('click', removeProductFromCart)
-);
-
-
-// Öka funktion
+  // ÖKA FUNKTION PÅ PRODUKTER VARUKORG
 
 function increaseProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -388,8 +358,7 @@ function increaseProductFromCart(e) {
   updateCartTotals();
 }
 
-
-// minska funktion
+// MINSKA FUNKTION PÅ PRODUKTER VARUKORG
 
 function decreaseProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -404,7 +373,7 @@ function decreaseProductFromCart(e) {
   updateCartTotals();
 }
 
-// Ta bort funktion
+// TA BORT FUNKTION PÅ PRODUKTER VARUKORG
 
 function removeProductFromCart(e) {
   const id = Number(e.target.dataset.id);
@@ -420,8 +389,7 @@ function removeProductFromCart(e) {
 
 }
 
-
-// Funktion för att minska och öka antal produkter på produkter
+// ÄKA OCH MINSKA PRODUKTER PÅ PRODUKTER
 
 function increaseProductCount(e) {
   const clickedId = e.target.dataset.id;
@@ -444,6 +412,42 @@ buyButtons.forEach(btn => {
   btn.addEventListener('click', addProductToCart);
 });
 
+// ----------ÖPPNA OCH STÄNG VARUKORG-----
+
+function toggleCart() {
+  const isOpen = !cartEl.classList.contains('hidden');
+
+  cartEl.classList.toggle('hidden');
+  cartToggleBtn.setAttribute('aria-expanded', String(!isOpen));
+}
+
+
+// -------------------------------------------------------
+// ----------------------EVENTLYSSNARE ----------------------
+// -------------------------------------------------------
+
+filterSelect.addEventListener('change', handleDropdownFilter); // Dropdown filter
+sortSelect.addEventListener('change', handleSortChange); // Eventlyssnare för sorteringsdropdown
+
+
+// Eventlyssnare för varukorgensknappar
+
+  const increaseBtns = document.querySelectorAll('.increase-cart');
+increaseBtns.forEach(btn =>
+  btn.addEventListener('click', increaseProductFromCart)
+);
+
+const decreaseBtns = document.querySelectorAll('.decrease-cart');
+decreaseBtns.forEach(btn =>
+  btn.addEventListener('click', decreaseProductFromCart)
+);
+
+const removeBtns = document.querySelectorAll('.remove-cart');
+removeBtns.forEach(btn =>
+  btn.addEventListener('click', removeProductFromCart)
+);
+
+
 // ------------ Eventlyssnare på varukorg (visa dölj)----
 
 cartToggle.addEventListener('click', () => {
@@ -456,9 +460,29 @@ closeCartBtn.addEventListener('click', () => {
   cartToggle.setAttribute('aria-expanded', 'false');
 });
 
+// ----------eventlyssnare på att öppna formulär i kassan ---
+checkoutToggleBtn.addEventListener('click', () => {
+  checkoutFormWrapper.classList.toggle('hidden');
+});
+
+// Eventlyssnare för köpknappar
+const increaseButtons = document.querySelectorAll('.increase');
+increaseButtons.forEach(btn => {
+  btn.addEventListener('click', increaseProductCount);
+});
+
+const decreaseButtons = document.querySelectorAll('.decrease');
+decreaseButtons.forEach(btn => {
+  btn.addEventListener('click', decreaseProductCount);
+});
+
+const buyButtons = document.querySelectorAll('.buy');
+buyButtons.forEach(btn => {
+  btn.addEventListener('click', addProductToCart);
+});
 
 // -------------------------------------------------------
-// ----------------------Renderfunktion ------------------
+// ----------------------RENDER FUNKTION -----------------
 // -------------------------------------------------------
 
 function renderProducts() {
@@ -493,22 +517,6 @@ function renderProducts() {
     productsListing.innerHTML += html;
 
   });
-
-// Eventlyssnare för köpknappar
-const increaseButtons = document.querySelectorAll('.increase');
-increaseButtons.forEach(btn => {
-  btn.addEventListener('click', increaseProductCount);
-});
-
-const decreaseButtons = document.querySelectorAll('.decrease');
-decreaseButtons.forEach(btn => {
-  btn.addEventListener('click', decreaseProductCount);
-});
-
-const buyButtons = document.querySelectorAll('.buy');
-buyButtons.forEach(btn => {
-  btn.addEventListener('click', addProductToCart);
-});
 
   }
 

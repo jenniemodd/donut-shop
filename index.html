@@ -32,57 +32,20 @@
 <section id="cart" class="cart hidden">
   <h2 id="cart-heading" class="sr-only">Varukorg</h2>
 
-  <div id="cart items" class="cart-items">
+  <button class="close-cart" aria-label="Stäng varukorg">✕</button>
+
+  <div id="cart-items" class="cart-items">
     <!-- produkter från js -->
   </div>
 
   <p class="cart-total">
     Totalt: <span id="cart-total">0 kr</span>
   </p>
-</section>
-</section>
 
+  <button id="checkoutToggle">Till kassan</button>
 
-    
-    
-    </header>
-
-      <main>
-  
-
-<!-- TEST DROPDOWN PÅ FILTER -->
- <section class="controls">
-
-  <label for="filterSelect" class="sr-only">Filtrera produkter</label>
-  <select id="filterSelect" class="filter-button">
-    <option value="" selected disabled hidden>Filtrera</option>
-    <option value="all">Alla</option>
-    <option value="plain">Vanlig</option>
-    <option value="glazed">Glasyr</option>
-    <option value="sugar">Socker</option>
-  </select>
-</div>
-
-<!-------TEST DROPDOWN PÅ SORTERING--->
-
-
-<label for="sortSelect" class="sr-only">Sortera produkter</label>
-<select id="sortSelect" class="sort-button">
-  <option value="" selected disabled hidden>Sortera</option>
-  <option value="name">Namn</option>
-  <option value="price">Pris (lågt → högt)</option>
-  <option value="rating">Betyg (högt → lågt)</option>
-  <option value="category">Kategori</option>
-</select>
-</section>
-
-<section class="products-list" id="products">
-  <!-- produkter visas här från js -->
-</section>
-
-
-
-<!---------Beställningsformulär ----->
+  <div id="checkoutFormWrapper" class="hidden">
+  <!---------Beställningsformulär ----->
 
 <section class="checkout">
   <h2>Beställning</h2>
@@ -175,7 +138,47 @@
     </div>
   </form>
 </section>
+  </div>
 
+</section>
+</section>
+
+    
+    
+    </header>
+
+      <main>
+  
+
+<!-- TEST DROPDOWN PÅ FILTER -->
+ <section class="controls">
+
+  <label for="filterSelect" class="sr-only">Filtrera produkter</label>
+  <select id="filterSelect" class="filter-button">
+    <option value="" selected disabled hidden>Filtrera</option>
+    <option value="all">Alla</option>
+    <option value="plain">Vanlig</option>
+    <option value="glazed">Glasyr</option>
+    <option value="sugar">Socker</option>
+  </select>
+</div>
+
+<!-------TEST DROPDOWN PÅ SORTERING--->
+
+
+<label for="sortSelect" class="sr-only">Sortera produkter</label>
+<select id="sortSelect" class="sort-button">
+  <option value="" selected disabled hidden>Sortera</option>
+  <option value="name">Namn</option>
+  <option value="price">Pris (lågt → högt)</option>
+  <option value="rating">Betyg (högt → lågt)</option>
+  <option value="category">Kategori</option>
+</select>
+</section>
+
+<section class="products-list" id="products">
+  <!-- produkter visas här från js -->
+</section>
 
     </main>
     

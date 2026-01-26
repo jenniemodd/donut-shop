@@ -206,127 +206,118 @@ const cartEl = document.querySelector('#cart');
 const closeCartBtn = document.querySelector('.close-cart');
 const checkoutToggleBtn = document.querySelector('#checkoutToggle');
 const checkoutFormWrapper = document.querySelector('#checkoutFormWrapper');
+const cartWrapper = document.querySelector('.cart-wrapper');
+const cartTotalEl = document.querySelector('#cart-total');
 
 
 
+/* ======================================================
+   HJÄLPFUNKTIONER
+   Små funktioner som används på flera ställen
+====================================================== */
 
-// -------------------------------------------------------
-// ----------------------FUNKTIONER ----------------------
-// -------------------------------------------------------
+// Räknar ut totalsumman i varukorgen
+function updateCartTotals() {
+  let total = 0;
 
-// ----------- FILTRERA DROPDOWN -------------------------
+  cart.forEach(product => {
+    total += product.price * product.amount;
+  });
 
-function handleDropdownFilter() {
-  const selectedCategory = filterSelect.value;
+  cartTotalEl.textContent = `${total} kr`;
+}
 
-  if (selectedCategory === 'all') {
-    filteredProducts = Array.from(products);
-  } else {
-    filteredProducts = products.filter(
-      product => product.category === selectedCategory
-    );
-  }
+// Liten animation när något läggs i varukorgen
+function animateCart() {
+  cartWrapper.classList.add('animate');
+  setTimeout(() => cartWrapper.classList.remove('animate'), 300);
+}
 
-  renderProducts();
+// Växlar mellan varukorg och kassa (checkout-formulär)
+function toggleCheckout() {
+  const isHidden = checkoutFormWrapper.classList.toggle('hidden');
+
+  checkoutToggleBtn.textContent = isHidden
+    ? 'Till kassan'
+    : 'Stäng kassan';
 }
 
 
-// ------------SORTERA DROPDOWN --------------------------
 
-function handleSortChange() {
-  const sortValue = sortSelect.value;
+/* ======================================================
+   VARUKORG – LOGIK
+   Funktioner som ändrar cart-arrayen
+====================================================== */
 
-  if (sortValue === 'name') {
-    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  if (sortValue === 'price') {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  }
-
-  if (sortValue === 'rating') {
-    filteredProducts.sort((a, b) => b.rating - a.rating);
-  }
-
-  if (sortValue === 'category') {
-    filteredProducts.sort((a, b) => a.category.localeCompare(b.category));
-  }
-
-  renderProducts();
-}
-
-
-// ----------------------VARUKORG --------------------------
-
+// Lägg till produkt i varukorgen
 function addProductToCart(e) {
-  const clickedId = Number(e.target.dataset.id);
+  const id = Number(e.target.dataset.id);
+  const input = document.querySelector(`#amount-${id}`);
+  const amount = Number(input.value);
 
-  // Hämta inputfältet för rätt produkt
-  const inputField = document.querySelector(`#amount-${clickedId}`);
-  const amount = Number(inputField.value);
-
-  // Validering: inget negativt eller noll
+  // Om användaren inte valt antal – gör inget
   if (amount <= 0) return;
 
-  const product = products.find(product => product.id === clickedId);
-  if (!product) return;
+  const product = products.find(p => p.id === id);
+  const index = cart.findIndex(item => item.id === id);
 
-  const index = cart.findIndex(item => item.id === clickedId);
-
+  // Finns produkten redan?
   if (index === -1) {
     cart.push({ ...product, amount });
   } else {
     cart[index].amount += amount;
   }
 
-  // ------------------CART TOTAL -----------------------
-
-
-const cartTotalEl = document.querySelector('#cart-total');
-function updateCartTotals() {
-
-
-  let cartTotal = 0;
-
-  for (let i = 0; i < cart.length; i++) {
-    const productSum = cart[i].price * cart[i].amount;
-    cartTotal += productSum;
-  }
-
-  cartTotalEl.innerHTML = `${cartTotal} kr`;
-
-  console.log(cartTotalEl);
-
-
-}
-
-
-  // Återställ input-fältets värde till 0 efter tryck på köp-knappen
-  inputField.value = 0;
-  
-  console.log(cart);
-
-   updateCartTotals();
+  input.value = 0;
 
   renderCart();
+  updateCartTotals();
   animateCart();
 }
 
-// ---------------------ANIMATION CART ------------
+// Öka antal i varukorgen
+function increaseProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+  const product = cart.find(p => p.id === id);
 
-const cartWrapper = document.querySelector('.cart-wrapper');
+  if (!product) return;
 
-function animateCart() {
-  cartWrapper.classList.add('animate');
-
-  setTimeout(() => {
-    cartWrapper.classList.remove('animate');
-  }, 300);
+  product.amount++;
+  renderCart();
+  updateCartTotals();
 }
 
-// ------------ÖKA MINSKA PRODUKTER VARUKORG--------
+// Minska antal i varukorgen
+function decreaseProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+  const product = cart.find(p => p.id === id);
+
+  if (!product || product.amount <= 1) return;
+
+  product.amount--;
+  renderCart();
+  updateCartTotals();
+}
+
+// Ta bort produkt helt från varukorgen
+function removeProductFromCart(e) {
+  const id = Number(e.target.dataset.id);
+  const index = cart.findIndex(p => p.id === id);
+
+  if (index === -1) return;
+
+  cart.splice(index, 1);
+  renderCart();
+  updateCartTotals();
+}
 
 
+/* ======================================================
+   RENDER-FUNKTIONER
+   Skriver ut HTML baserat på state
+====================================================== */
+
+// Renderar varukorgen
 function renderCart() {
   cartItemsEl.innerHTML = '';
 
@@ -334,121 +325,103 @@ function renderCart() {
     cartItemsEl.innerHTML += `
       <article class="cart-item">
         <p>${product.name}</p>
-
         <button class="decrease-cart" data-id="${product.id}">−</button>
         <span>${product.amount}</span>
         <button class="increase-cart" data-id="${product.id}">+</button>
-
         <button class="remove-cart" data-id="${product.id}">Ta bort</button>
       </article>
     `;
   });
 
-  // ÖKA FUNKTION PÅ PRODUKTER VARUKORG
+  // Eventlyssnare måste sättas EFTER att HTML skapats
+  document.querySelectorAll('.increase-cart')
+    .forEach(btn => btn.addEventListener('click', increaseProductFromCart));
 
-function increaseProductFromCart(e) {
-  const id = Number(e.target.dataset.id);
-  const product = cart.find(item => item.id === id);
+  document.querySelectorAll('.decrease-cart')
+    .forEach(btn => btn.addEventListener('click', decreaseProductFromCart));
 
-  if (!product) return;
-
-  product.amount += 1;
-
-  renderCart();
-  updateCartTotals();
+  document.querySelectorAll('.remove-cart')
+    .forEach(btn => btn.addEventListener('click', removeProductFromCart));
 }
 
-// MINSKA FUNKTION PÅ PRODUKTER VARUKORG
+// Renderar produktkorten
+function renderProducts() {
+  productsListing.innerHTML = '';
 
-function decreaseProductFromCart(e) {
-  const id = Number(e.target.dataset.id);
-  const product = cart.find(item => item.id === id);
+  filteredProducts.forEach(product => {
+    productsListing.innerHTML += `
+      <article class="product-card">
+        <img src="${product.image}" alt="${product.alt}">
+        <h3>${product.name}</h3>
+        <p>${product.price} kr</p>
 
-  if (!product) return;
-  if (product.amount <= 1) return;
+        <div class="amount-controls">
+          <button class="decrease" data-id="${product.id}">−</button>
+          <input id="amount-${product.id}" value="0" disabled>
+          <button class="increase" data-id="${product.id}">+</button>
+        </div>
 
-  product.amount -= 1;
+        <button class="buy" data-id="${product.id}">
+          Lägg i varukorg
+        </button>
+      </article>
+    `;
+  });
 
-  renderCart();
-  updateCartTotals();
+  // Eventlyssnare för produktsidor
+  document.querySelectorAll('.increase').forEach(btn =>
+    btn.addEventListener('click', e => {
+      const id = e.target.dataset.id;
+      const input = document.querySelector(`#amount-${id}`);
+      input.value++;
+    })
+  );
+
+  document.querySelectorAll('.decrease').forEach(btn =>
+    btn.addEventListener('click', e => {
+      const id = e.target.dataset.id;
+      const input = document.querySelector(`#amount-${id}`);
+      if (input.value > 0) input.value--;
+    })
+  );
+
+  document.querySelectorAll('.buy')
+    .forEach(btn => btn.addEventListener('click', addProductToCart));
 }
 
-// TA BORT FUNKTION PÅ PRODUKTER VARUKORG
+/* ======================================================
+   FILTER & SORT
+====================================================== */
 
-function removeProductFromCart(e) {
-  const id = Number(e.target.dataset.id);
+function handleDropdownFilter() {
+  const value = filterSelect.value;
 
-  const index = cart.findIndex(item => item.id === id);
-  if (index === -1) return;
+  filteredProducts = value === 'all'
+    ? [...products]
+    : products.filter(p => p.category === value);
 
-  cart.splice(index, 1);
-
-  renderCart();
-  updateCartTotals();
+  renderProducts();
 }
 
+function handleSortChange() {
+  const value = sortSelect.value;
+
+  if (value === 'name') filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  if (value === 'price') filteredProducts.sort((a, b) => a.price - b.price);
+  if (value === 'rating') filteredProducts.sort((a, b) => b.rating - a.rating);
+  if (value === 'category') filteredProducts.sort((a, b) => a.category.localeCompare(b.category));
+
+  renderProducts();
 }
 
-// ÄKA OCH MINSKA PRODUKTER PÅ PRODUKTER
+/* ======================================================
+   EVENTLYSSNARE
+====================================================== */
 
-function increaseProductCount(e) {
-  const clickedId = e.target.dataset.id;
-  const input = document.querySelector(`#amount-${clickedId}`);
+filterSelect.addEventListener('change', handleDropdownFilter);
+sortSelect.addEventListener('change', handleSortChange);
 
-  input.value = Number(input.value) + 1;
-}
-
-function decreaseProductCount(e) {
-  const clickedId = e.target.dataset.id;
-  const input = document.querySelector(`#amount-${clickedId}`);
-
-  if (Number(input.value) > 0) {
-    input.value = Number(input.value) - 1;
-  }
-}
-
-const buyButtons = document.querySelectorAll('.buy');
-buyButtons.forEach(btn => {
-  btn.addEventListener('click', addProductToCart);
-});
-
-// ----------ÖPPNA OCH STÄNG VARUKORG-----
-
-function toggleCart() {
-  const isOpen = !cartEl.classList.contains('hidden');
-
-  cartEl.classList.toggle('hidden');
-  cartToggleBtn.setAttribute('aria-expanded', String(!isOpen));
-}
-
-
-// -------------------------------------------------------
-// ----------------------EVENTLYSSNARE ----------------------
-// -------------------------------------------------------
-
-filterSelect.addEventListener('change', handleDropdownFilter); // Dropdown filter
-sortSelect.addEventListener('change', handleSortChange); // Eventlyssnare för sorteringsdropdown
-
-
-// Eventlyssnare för varukorgensknappar
-
-  const increaseBtns = document.querySelectorAll('.increase-cart');
-increaseBtns.forEach(btn =>
-  btn.addEventListener('click', increaseProductFromCart)
-);
-
-const decreaseBtns = document.querySelectorAll('.decrease-cart');
-decreaseBtns.forEach(btn =>
-  btn.addEventListener('click', decreaseProductFromCart)
-);
-
-const removeBtns = document.querySelectorAll('.remove-cart');
-removeBtns.forEach(btn =>
-  btn.addEventListener('click', removeProductFromCart)
-);
-
-
-// ------------ Eventlyssnare på varukorg (visa dölj)----
+checkoutToggleBtn.addEventListener('click', toggleCheckout);
 
 cartToggle.addEventListener('click', () => {
   cartEl.classList.remove('hidden');
@@ -460,65 +433,10 @@ closeCartBtn.addEventListener('click', () => {
   cartToggle.setAttribute('aria-expanded', 'false');
 });
 
-// ----------eventlyssnare på att öppna formulär i kassan ---
-checkoutToggleBtn.addEventListener('click', () => {
-  checkoutFormWrapper.classList.toggle('hidden');
-});
 
-// Eventlyssnare för köpknappar
-const increaseButtons = document.querySelectorAll('.increase');
-increaseButtons.forEach(btn => {
-  btn.addEventListener('click', increaseProductCount);
-});
+/* ======================================================
+   INIT – KÖRS NÄR SIDAN LADDAS
+====================================================== */
 
-const decreaseButtons = document.querySelectorAll('.decrease');
-decreaseButtons.forEach(btn => {
-  btn.addEventListener('click', decreaseProductCount);
-});
+renderProducts();
 
-const buyButtons = document.querySelectorAll('.buy');
-buyButtons.forEach(btn => {
-  btn.addEventListener('click', addProductToCart);
-});
-
-// -------------------------------------------------------
-// ----------------------RENDER FUNKTION -----------------
-// -------------------------------------------------------
-
-function renderProducts() {
-  // Töm tidigare innehåll
-  productsListing.innerHTML = '';
-
-  // Loopa igenom listan som ska visas
-  filteredProducts.forEach(product => {
-    const html = `
-      <article class="product-card">
-      <img src="${product.image}" alt="${product.alt}">
-        <h3>${product.name}</h3>
-        <p>${product.price} kr</p>
-        <p>Betyg: ${product.rating}/5</p>
-        
-        <div class="amount-controls">
-        <button class="decrease" data-id="${product.id}" aria-label="Öka antal">−</button>
-        <input 
-          type="number"
-          id="amount-${product.id}"
-          value="0"
-          disabled
-          aria-label="Antal ${product.name}"
-        >
-        <button class="increase" data-id="${product.id}" aria-label="Öka antal">+</button>
-        </div>
-        <button class="buy" data-id="${product.id}">Lägg i varukorg</button>
-        </article>
-    `;
-
-    // Lägg till HTML i containern
-    productsListing.innerHTML += html;
-
-  });
-
-  }
-
-// Initial rendering av produkter
-  renderProducts();

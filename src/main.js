@@ -444,6 +444,17 @@ buyButtons.forEach(btn => {
   btn.addEventListener('click', addProductToCart);
 });
 
+// ------------ Eventlyssnare på varukorg (visa dölj)----
+
+cartToggle.addEventListener('click', () => {
+  cartEl.classList.remove('hidden');
+  cartToggle.setAttribute('aria-expanded', 'true');
+});
+
+closeCartBtn.addEventListener('click', () => {
+  cartEl.classList.add('hidden');
+  cartToggle.setAttribute('aria-expanded', 'false');
+});
 
 
 // -------------------------------------------------------

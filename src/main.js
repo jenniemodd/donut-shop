@@ -211,7 +211,15 @@ const cartTotalEl = document.querySelector('#cart-total');
 const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
 
 
+// formulär
 
+const checkoutForm = document.querySelector('#checkoutForm');
+const orderBtn = checkoutForm.querySelector('button[type="submit"]');
+
+const firstNameField = document.querySelector('#firstName');
+const lastNameField = document.querySelector('#lastName');
+const emailField = document.querySelector('#email');
+const phoneField = document.querySelector('#phone');
 
 /* ======================================================
    HJÄLPFUNKTIONER
@@ -416,6 +424,37 @@ function handleSortChange() {
 
   renderProducts();
 }
+
+
+/* ======================================================
+   VARUKORG OCH LOGIK
+====================================================== */
+
+const nameRegex = /^[A-Za-zÀ-ÿ\s'-]{2,50}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^(\+46|0)[0-9]{7,10}$/;
+
+function validateFirstName() {
+  const isValid = nameRegex.test(firstNameField.value.trim());
+  firstNameField.classList.toggle('invalid', !isValid);
+  return isValid;
+}
+
+firstNameField.addEventListener('blur', () => {
+  validateFirstName();
+  toggleOrderButton();
+});
+
+function toggleOrderButton() {
+  const isValid =
+    validateFirstName() &&
+    validateEmail() &&
+    validatePhone();
+
+  orderBtn.disabled = !isValid;
+}
+
+
 
 /* ======================================================
    EVENTLYSSNARE

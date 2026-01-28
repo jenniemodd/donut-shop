@@ -61,8 +61,6 @@ PSEUDOKOD – WEBBSHOP MED MUNKAR
 12. Visa varukorg baserat på varukorgs arrayen. 
 -HTML uppdateras varje gång cart ändras. 
 
-
-
 */
 
 import '/style.scss';

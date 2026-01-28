@@ -433,6 +433,10 @@ cartToggle.addEventListener('click', () => {
 closeCartBtn.addEventListener('click', () => {
   cartEl.classList.add('hidden');
   cartToggle.setAttribute('aria-expanded', 'false');
+
+  // Stäng kassan om den är öppen
+  checkoutFormWrapper.classList.add('hidden');
+
 });
 
 

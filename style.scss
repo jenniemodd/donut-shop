@@ -121,12 +121,6 @@ body {
 }
 
 
-.hidden {
-  display: none;
-}
-
-
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -208,7 +202,28 @@ body {
   flex: 1;
   padding-right: 0.5rem;
   padding-bottom: 4rem;
+  padding-top: 1rem;
 }
+
+.close-cart {
+  position: sticky;
+  top: 0;
+  align-self: flex-end;
+
+  background: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  z-index: 1100;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
 
 
 /* ======================================================

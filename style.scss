@@ -403,6 +403,8 @@ body {
 
   .cart-total {
     text-align: right;
+    box-sizing: border-box;
+    padding-right: 1rem;
   }
 
   .cart-items {
@@ -421,6 +423,26 @@ body {
   .form-actions button {
     max-width: 240px;
   }
+
+ .site-header h1 {
+  font-family: 'Jost', sans-serif;
+  font-size: 2rem; color: var(--dark-green);
+}
+
+.site-header .logo {
+  width: 75px;
+  height: auto;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+
+.cart-icon {
+  width: 20px;
+  height: auto;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+  
 
 
 }

@@ -199,8 +199,143 @@ body {
   box-shadow: -4px 0 20px rgba(0,0,0,0.15);
   padding: 1rem;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
 
+.cart-content {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 0.5rem;
+  padding-bottom: 4rem;
+}
+
+
+/* ======================================================
+   CHECKOUT – FORMULÄR
+====================================================== */
+
+.checkout {
+  font-family: 'Jost', sans-serif;
+  margin-top: 1.5rem;
+}
+
+.checkout h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* ------------------ FORM ------------------ */
+
+#checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ------------------ FIELDSET ------------------ */
+
+#checkoutForm fieldset {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+#checkoutForm legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+/* ------------------ LABEL & INPUT ------------------ */
+
+#checkoutForm label {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+#checkoutForm input[type="text"],
+#checkoutForm input[type="email"],
+#checkoutForm input[type="tel"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+/* Fokus – viktigt för tillgänglighet */
+#checkoutForm input:focus {
+  outline: 3px solid #65c2b0;
+  outline-offset: 2px;
+}
+
+/* ------------------ RADIO & CHECKBOX ------------------ */
+
+#checkoutForm input[type="radio"],
+#checkoutForm input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
+
+#checkoutForm fieldset label input {
+  margin-right: 0.4rem;
+}
+
+/* ------------------ FELMARKERING ------------------ */
+
+#checkoutForm input.invalid {
+  border-color: #c1121f;
+  background-color: #fff5f5;
+}
+
+#checkoutForm input.invalid:focus {
+  outline-color: #c1121f;
+}
+
+/* ------------------ FORM ACTIONS ------------------ */
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Skicka */
+.form-actions button[type="submit"] {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  background-color: #1b433d;
+  color: white;
+  cursor: pointer;
+}
+
+/* Disabled */
+.form-actions button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Rensa */
+.form-actions button[type="reset"] {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #999;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* ------------------ BETALFÄLT ------------------ */
+
+#invoiceFields,
+#cardFields {
+  margin-top: 0.5rem;
+}
 
 
 
@@ -241,7 +376,6 @@ body {
     height: 100vh;
 
     padding: 1rem;
-    overflow-y: auto;
   }
 
 
@@ -260,6 +394,19 @@ body {
   text-align: right;
 
 }
+
+  #checkoutForm {
+    gap: 2rem;
+  }
+
+  .form-actions {
+    justify-content: space-between;
+  }
+
+  .form-actions button {
+    max-width: 240px;
+  }
+
 
 }
 

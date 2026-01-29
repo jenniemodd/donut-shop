@@ -450,135 +450,125 @@ renderProducts();
    CHECKOUT – FORMULÄR & VALIDERING
 ====================================================== */
 
-// Form & knapp
-const checkoutForm = document.querySelector('#checkoutForm');
-const orderBtn = checkoutForm.querySelector('button[type="submit"]');
+/* ======================================================
+   CHECKOUT – FORMULÄR & VALIDERING (LÄRAR-MODELL)
+====================================================== */
 
-// Inputfält
-const firstNameField = document.querySelector('#firstName');
-const lastNameField = document.querySelector('#lastName');
-const addressField = document.querySelector('#address');
-const postalCodeField = document.querySelector('#postalCode');
-const cityField = document.querySelector('#city');
-const phoneField = document.querySelector('#phone');
+// ███████████████████████████ ☑️ REGEX █████████████████
+const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
+const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const postalCodeRegex = /^[0-9]{3}\s?[0-9]{2}$/;
+const phoneRegex = /^(\+46|0)[0-9]{7,10}$/;
+const personnummerRegex = /^(\d{6}|\d{8})[-+]?\d{4}$/;
+
+// ███████████████████████████ 🔤 INPUTS ████████████████
+
+const firstName = document.querySelector('#firstName');
 const emailField = document.querySelector('#email');
+const postalCodeField = document.querySelector('#postalCode');
+const phoneField = document.querySelector('#phone');
 const personnummerField = document.querySelector('#personnummer');
-
-// Betalsätt
-const paymentRadios = document.querySelectorAll('input[name="payment"]');
 
 // Sektioner
 const invoiceFields = document.querySelector('#invoiceFields');
-const cardFields = document.querySelector('#cardFields');
 
-// regex
+// ███████████████████████████ ⚡️ EVENT LISTENERS ███████
+firstName.addEventListener('focusout', validateFirstNameField);
+emailField.addEventListener('focusout', validateEmail);
+postalCodeField.addEventListener('focusout', validatePostalCode);
+phoneField.addEventListener('focusout', validatePhone);
+personnummerField.addEventListener('focusout', validatePersonnummer);
 
-const nameRegex = /^[A-Za-zÀ-ÿ\s'-]{2,50}$/;
-const postalCodeRegex = /^[0-9]{3}\s?[0-9]{2}$/;
-const phoneRegex = /^(\+46|0)[0-9]{7,10}$/;
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+checkoutForm.addEventListener('focusout', checkFormValidity);
 
-// Svenskt personnummer (YYYYMMDD-XXXX eller YYMMDD-XXXX)
-const personnummerRegex = /^(\d{6}|\d{8})[-+]?\d{4}$/;
+// ███████████████████████████ ⚙️ FUNCTIONS █████████████
 
-// Validering
+function showError(field, show) {
+  const error = field.nextElementSibling;
+  if (!error) return;
 
-function validateField(field, regex) {
-  const isValid = regex.test(field.value.trim());
-  field.classList.toggle('invalid', !isValid);
+  error.classList.toggle('hidden', !show);
+  field.setAttribute('aria-invalid', show ? 'true' : 'false');
+}
+
+function validateFirstNameField() {
+  const value = firstName.value.trim();
+
+  if (value.length === 0) {
+    return;
+  }
+
+  const isValid = firstNameRegEx.test(value);
+
+  firstName.nextElementSibling.classList.toggle('hidden', isValid);
+  firstName.setAttribute('aria-invalid', String(!isValid));
+
   return isValid;
 }
 
-function validateFirstName() {
-  return validateField(firstNameField, nameRegex);
-}
 
-function validateLastName() {
-  return validateField(lastNameField, nameRegex);
-}
+function validateEmail() {
+  const value = emailField.value.trim();
 
-function validateAddress() {
-  return addressField.value.trim().length >= 2;
+  if (value.length === 0) {
+    showError(emailField, false);
+    return false;
+  }
+
+  const isValid = emailRegEx.test(value);
+  showError(emailField, !isValid);
+  return isValid;
 }
 
 function validatePostalCode() {
-  return validateField(postalCodeField, postalCodeRegex);
-}
+  const value = postalCodeField.value.trim();
+  if (value.length === 0) return false;
 
-function validateCity() {
-  return cityField.value.trim().length >= 2;
+  const isValid = postalCodeRegex.test(value);
+  showError(postalCodeField, !isValid);
+  return isValid;
 }
 
 function validatePhone() {
-  return validateField(phoneField, phoneRegex);
-}
+  const value = phoneField.value.trim();
+  if (value.length === 0) return false;
 
-function validateEmail() {
-  return validateField(emailField, emailRegex);
+  const isValid = phoneRegex.test(value);
+  showError(phoneField, !isValid);
+  return isValid;
 }
 
 function validatePersonnummer() {
   if (invoiceFields.hasAttribute('hidden')) return true;
-  return validateField(personnummerField, personnummerRegex);
+
+  const value = personnummerField.value.trim();
+  if (value.length === 0) return false;
+
+  const isValid = personnummerRegex.test(value);
+  showError(personnummerField, !isValid);
+  return isValid;
 }
 
-// Betalsätt
+// ███████████████████████████ 🧠 CHECK ALL ██████████████
+function checkFormValidity() {
+  orderBtn.setAttribute('disabled', '');
 
-paymentRadios.forEach(radio => {
-  radio.addEventListener('change', () => {
-    if (radio.value === 'invoice' && radio.checked) {
-      invoiceFields.removeAttribute('hidden');
-      cardFields.setAttribute('hidden', '');
-    }
+  const firstNameOk = validateFirstNameField();
+  const emailOk = validateEmail();
 
-    if (radio.value === 'card' && radio.checked) {
-      cardFields.removeAttribute('hidden');
-      invoiceFields.setAttribute('hidden', '');
-    }
+  // ⛔ Stoppa endast om fältet är ifyllt men FEL
+  if (firstNameOk === false) return;
+  if (emailOk === false) return;
 
-    toggleOrderButton();
-  });
-});
+  // ⛔ Om fält ännu inte är ifyllda
+  if (firstNameOk === undefined || emailOk === undefined) return;
 
-// Aktivera/inaktivera "Skicka beställning"
-
-function toggleOrderButton() {
-  const isValid =
-    validateFirstName() &&
-    validateLastName() &&
-    validateAddress() &&
-    validatePostalCode() &&
-    validateCity() &&
-    validatePhone() &&
-    validateEmail() &&
-    validatePersonnummer() &&
-    checkoutForm.querySelector('#terms').checked;
-
-  orderBtn.disabled = !isValid;
+  orderBtn.removeAttribute('disabled');
 }
 
-// Eventlyssnare
-
-[
-  firstNameField,
-  lastNameField,
-  addressField,
-  postalCodeField,
-  cityField,
-  phoneField,
-  emailField,
-  personnummerField
-].forEach(field => {
-  field.addEventListener('blur', toggleOrderButton);
-});
-
-
-// Förhindra submit (om något är fel)
-
+// ███████████████████████████ 🚫 SUBMIT █████████████████
 checkoutForm.addEventListener('submit', e => {
   e.preventDefault();
-
   if (orderBtn.disabled) return;
-
   alert('Beställning skickad! 🎉');
 });

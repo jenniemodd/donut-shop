@@ -446,43 +446,27 @@ console.log ()
 
 renderProducts();
 
-/* ======================================================
-   CHECKOUT – FORMULÄR & VALIDERING
-====================================================== */
+/* =========================
+   CHECKOUT – VALIDATION
+========================= */
 
-/* ======================================================
-   CHECKOUT – FORMULÄR & VALIDERING (LÄRAR-MODELL)
-====================================================== */
-
-// ███████████████████████████ ☑️ REGEX █████████████████
+// REGEX
 const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
 const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const postalCodeRegex = /^[0-9]{3}\s?[0-9]{2}$/;
-const phoneRegex = /^(\+46|0)[0-9]{7,10}$/;
-const personnummerRegex = /^(\d{6}|\d{8})[-+]?\d{4}$/;
 
-// ███████████████████████████ 🔤 INPUTS ████████████████
+// ELEMENT
+const checkoutForm = document.querySelector('#checkoutForm');
+const orderBtn = checkoutForm.querySelector('button[type="submit"]');
 
 const firstName = document.querySelector('#firstName');
 const emailField = document.querySelector('#email');
-const postalCodeField = document.querySelector('#postalCode');
-const phoneField = document.querySelector('#phone');
-const personnummerField = document.querySelector('#personnummer');
 
-// Sektioner
-const invoiceFields = document.querySelector('#invoiceFields');
-
-// ███████████████████████████ ⚡️ EVENT LISTENERS ███████
+// EVENT LISTENERS
 firstName.addEventListener('focusout', validateFirstNameField);
-emailField.addEventListener('focusout', validateEmail);
-postalCodeField.addEventListener('focusout', validatePostalCode);
-phoneField.addEventListener('focusout', validatePhone);
-personnummerField.addEventListener('focusout', validatePersonnummer);
-
+emailField.addEventListener('focusout', validateEmailField);
 checkoutForm.addEventListener('focusout', checkFormValidity);
 
-// ███████████████████████████ ⚙️ FUNCTIONS █████████████
-
+// HELPERS
 function showError(field, show) {
   const error = field.nextElementSibling;
   if (!error) return;
@@ -491,76 +475,35 @@ function showError(field, show) {
   field.setAttribute('aria-invalid', show ? 'true' : 'false');
 }
 
+// VALIDATION
 function validateFirstNameField() {
   const value = firstName.value.trim();
 
-  if (value.length === 0) {
-    return;
-  }
+  if (value.length === 0) return;
 
   const isValid = firstNameRegEx.test(value);
-
-  firstName.nextElementSibling.classList.toggle('hidden', isValid);
-  firstName.setAttribute('aria-invalid', String(!isValid));
-
+  showError(firstName, !isValid);
   return isValid;
 }
 
-
-function validateEmail() {
+function validateEmailField() {
   const value = emailField.value.trim();
 
-  if (value.length === 0) {
-    showError(emailField, false);
-    return false;
-  }
+  if (value.length === 0) return;
 
   const isValid = emailRegEx.test(value);
   showError(emailField, !isValid);
   return isValid;
 }
 
-function validatePostalCode() {
-  const value = postalCodeField.value.trim();
-  if (value.length === 0) return false;
-
-  const isValid = postalCodeRegex.test(value);
-  showError(postalCodeField, !isValid);
-  return isValid;
-}
-
-function validatePhone() {
-  const value = phoneField.value.trim();
-  if (value.length === 0) return false;
-
-  const isValid = phoneRegex.test(value);
-  showError(phoneField, !isValid);
-  return isValid;
-}
-
-function validatePersonnummer() {
-  if (invoiceFields.hasAttribute('hidden')) return true;
-
-  const value = personnummerField.value.trim();
-  if (value.length === 0) return false;
-
-  const isValid = personnummerRegex.test(value);
-  showError(personnummerField, !isValid);
-  return isValid;
-}
-
-// ███████████████████████████ 🧠 CHECK ALL ██████████████
+// CHECK ALL
 function checkFormValidity() {
   orderBtn.setAttribute('disabled', '');
 
   const firstNameOk = validateFirstNameField();
-  const emailOk = validateEmail();
+  const emailOk = validateEmailField();
 
-  // ⛔ Stoppa endast om fältet är ifyllt men FEL
-  if (firstNameOk === false) return;
-  if (emailOk === false) return;
-
-  // ⛔ Om fält ännu inte är ifyllda
+  if (firstNameOk === false || emailOk === false) return;
   if (firstNameOk === undefined || emailOk === undefined) return;
 
   orderBtn.removeAttribute('disabled');

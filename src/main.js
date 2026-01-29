@@ -578,3 +578,17 @@ checkoutForm.addEventListener('submit', e => {
   if (orderBtn.disabled) return;
   alert('Beställning skickad! 🎉');
 });
+
+
+// TIMER
+
+const SLOWNESS_TIMER_MINUTES = 15;
+
+setTimeout(() => {
+  cart.length = 0;
+  renderCart();
+  updateCartTotals();
+  checkoutForm.reset();
+
+  alert('Tiden gick ut – beställningen har rensats.');
+}, 1000 * 60 * SLOWNESS_TIMER_MINUTES);

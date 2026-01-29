@@ -446,16 +446,79 @@ console.log ()
 
 renderProducts();
 
+
 /* =========================
    CHECKOUT – VALIDATION
 ========================= */
 
+// REGEX
+const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
+const lastNameRegEx  = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
+const emailRegEx     = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegEx     = /^(\+46|0)[0-9]{7,10}$/;
+const postalRegEx    = /^[0-9]{3}\s?[0-9]{2}$/;
+const personRegEx    = /^(\d{6}|\d{8})[-+]?\d{4}$/;
+
+// ELEMENT
+const checkoutForm = document.querySelector('#checkoutForm');
+const orderBtn = checkoutForm.querySelector('button[type="submit"]');
+
+const firstName = document.querySelector('#firstName');
+const lastName = document.querySelector('#lastName');
+const email = document.querySelector('#email');
+const phone = document.querySelector('#phone');
+const postalCode = document.querySelector('#postalCode');
+const personnummer = document.querySelector('#personnummer');
+
+const invoiceFields = document.querySelector('#invoiceFields');
+const cardFields = document.querySelector('#cardFields');
+const paymentRadios = document.querySelectorAll('input[name="payment"]');
+
+// HELPERS
+function showError(field, show) {
+  const error = field.nextElementSibling;
+  if (!error) return;
+
+  error.classList.toggle('hidden', !show);
+  field.setAttribute('aria-invalid', show ? 'true' : 'false');
+}
+
+// VALIDATION FUNCTIONS
+function validateField(field, regex) {
+  const value = field.value.trim();
+  if (value.length === 0) return undefined;
+
+  const isValid = regex.test(value);
+  showError(field, !isValid);
+  return isValid;
+}
+
+function validateFirstName() {
+  return validateField(firstName, firstNameRegEx);
+}
+
+function validateLastName() {
+  return validateField(lastName, lastNameRegEx);
+}
+
+function validateEmail() {
+  return validateField(email, emailRegEx);
+}
+
+function validatePhone() {
+  return validateField(phone, phoneRegEx);
+}
+
+function validatePostalCode() {
+  return validateField(postalCode, postalRegEx);
+}
+
+function validatePersonnummer() {
+  if (invoiceFields.hasAttribute('hidden')) return true;
+  return validateField(personnummer, personRegEx);
+}
 
 // PAYMENT TOGGLE
-const paymentRadios = document.querySelectorAll('input[name="payment"]');
-const cardFields = document.querySelector('#cardFields');
-const invoiceFields = document.querySelector('#invoiceFields');
-
 paymentRadios.forEach(radio => {
   radio.addEventListener('change', () => {
     if (radio.value === 'card' && radio.checked) {
@@ -468,71 +531,48 @@ paymentRadios.forEach(radio => {
       cardFields.setAttribute('hidden', '');
     }
 
-    checkFormValidity(); // viktigt
+    checkFormValidity();
   });
 });
 
-
-// REGEX
-const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
-const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// ELEMENT
-const checkoutForm = document.querySelector('#checkoutForm');
-const orderBtn = checkoutForm.querySelector('button[type="submit"]');
-
-const firstName = document.querySelector('#firstName');
-const emailField = document.querySelector('#email');
-
 // EVENT LISTENERS
-firstName.addEventListener('focusout', validateFirstNameField);
-emailField.addEventListener('focusout', validateEmailField);
-checkoutForm.addEventListener('focusout', checkFormValidity);
-
-// HELPERS
-function showError(field, show) {
-  const error = field.nextElementSibling;
-  if (!error) return;
-
-  error.classList.toggle('hidden', !show);
-  field.setAttribute('aria-invalid', show ? 'true' : 'false');
-}
-
-// VALIDATION
-function validateFirstNameField() {
-  const value = firstName.value.trim();
-
-  if (value.length === 0) return;
-
-  const isValid = firstNameRegEx.test(value);
-  showError(firstName, !isValid);
-  return isValid;
-}
-
-function validateEmailField() {
-  const value = emailField.value.trim();
-
-  if (value.length === 0) return;
-
-  const isValid = emailRegEx.test(value);
-  showError(emailField, !isValid);
-  return isValid;
-}
+[
+  firstName,
+  lastName,
+  email,
+  phone,
+  postalCode,
+  personnummer
+].forEach(field => {
+  field.addEventListener('focusout', checkFormValidity);
+});
 
 // CHECK ALL
 function checkFormValidity() {
   orderBtn.setAttribute('disabled', '');
 
-  const firstNameOk = validateFirstNameField();
-  const emailOk = validateEmailField();
+  const results = [
+    validateFirstName(),
+    validateLastName(),
+    validateEmail(),
+    validatePhone(),
+    validatePostalCode(),
+    validatePersonnummer()
+  ];
 
-  if (firstNameOk === false || emailOk === false) return;
-  if (firstNameOk === undefined || emailOk === undefined) return;
+  // Om något är FEL → stoppa
+  if (results.includes(false)) return;
+
+  // Om något ännu inte är ifyllt → stoppa
+  if (results.includes(undefined)) return;
+
+  // Villkor: villkor-checkbox
+  if (!checkoutForm.querySelector('#terms').checked) return;
 
   orderBtn.removeAttribute('disabled');
 }
 
-// ███████████████████████████ 🚫 SUBMIT █████████████████
+// SUBMIT
 checkoutForm.addEventListener('submit', e => {
   e.preventDefault();
   if (orderBtn.disabled) return;

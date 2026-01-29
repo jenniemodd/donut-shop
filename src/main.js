@@ -450,6 +450,29 @@ renderProducts();
    CHECKOUT – VALIDATION
 ========================= */
 
+
+// PAYMENT TOGGLE
+const paymentRadios = document.querySelectorAll('input[name="payment"]');
+const cardFields = document.querySelector('#cardFields');
+const invoiceFields = document.querySelector('#invoiceFields');
+
+paymentRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (radio.value === 'card' && radio.checked) {
+      cardFields.removeAttribute('hidden');
+      invoiceFields.setAttribute('hidden', '');
+    }
+
+    if (radio.value === 'invoice' && radio.checked) {
+      invoiceFields.removeAttribute('hidden');
+      cardFields.setAttribute('hidden', '');
+    }
+
+    checkFormValidity(); // viktigt
+  });
+});
+
+
 // REGEX
 const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
 const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

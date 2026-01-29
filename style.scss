@@ -233,6 +233,17 @@ body {
   display: none;
 }
 
+#checkoutToggle {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  background-color: var(--turquoise);
+  color: black;
+  padding: 0.7rem 1rem;
+  border-radius: 25px;
+  text-align: center;
+  border: none;
+}
+
 
 
 
@@ -337,7 +348,7 @@ body {
   padding: 0.7rem;
   border-radius: 999px;
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   background-color: #1b433d;
   color: white;
   cursor: pointer;

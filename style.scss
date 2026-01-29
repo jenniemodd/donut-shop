@@ -15,14 +15,23 @@ body {
   display: flex;
   border-bottom: solid 1px #1b433d;
   margin-bottom: 17px;
+
 }
 
-.site-header img {
-  width: 100px;
+.site-header .logo {
+  width: 120px;
   height: auto;
   margin-bottom: 10px;
   justify-content: flex-start;
 }
+
+.site-header .cart-icon {
+  width: 40px;
+  height: auto;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+
 
 .site-header h1 {
   position: absolute;
@@ -395,11 +404,13 @@ body {
 
 
 .cart-wrapper {
-  margin-right: auto;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  justify-content: flex-end; /* 👈 tryck allt åt höger */
+  gap: 0.4rem;
+  max-width: 100%;
 }
+
 
   .cart-total {
     text-align: right;

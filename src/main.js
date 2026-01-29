@@ -214,17 +214,51 @@ const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
    Små funktioner som används på flera ställen
 ====================================================== */
 
+// 🔔 TEST (byt till new Date() vid inlämning)
+const date = new Date(2026, 1, 2, 9, 0);
+// VID INLÄMNING:
+// const date = new Date();
+
+const MONDAY = 1;
+
 // Räknar ut totalsumman i varukorgen
 function updateCartTotals() {
-  let total = 0;
+  let cartSum = 0;
+  let totalProductCount = 0;
+  let shippingCost = 25;
 
+  // 1. Räkna summa & antal
   cart.forEach(product => {
-    total += product.price * product.amount;
+    cartSum += product.price * product.amount;
+    totalProductCount += product.amount;
   });
 
-  cartTotalEl.textContent = `${total} kr`;
-  cartSummaryTotalEl.textContent = `${total} kr`;
+  // 2. MÅNDAGSRABATT
+  if (date.getDay() === MONDAY && date.getHours() < 10) {
+    cartSum *= 0.9;
+    document.querySelector('#discount').textContent =
+      'Måndagsrabatt: 10 % på hela beställningen';
+  } else {
+    document.querySelector('#discount').textContent = '';
+  }
+
+  // 3. FRAKT
+  if (totalProductCount > 15) {
+    shippingCost = 0;
+  } else {
+    shippingCost = 25 + (cartSum * 0);
+  }
+
+  document.querySelector('#shippingCost').textContent =
+    `Fraktkostnad: ${Math.round(shippingCost)} kr`;
+
+  // 4. TOTAL INKL FRAKT
+  const totalWithShipping = cartSum + shippingCost;
+
+  cartTotalEl.textContent = `${Math.round(totalWithShipping)} kr`;
+  cartSummaryTotalEl.textContent = `${Math.round(totalWithShipping)} kr`;
 }
+
 
 // Liten animation när något läggs i varukorgen
 function animateCart() {
@@ -445,6 +479,8 @@ console.log ()
 ====================================================== */
 
 renderProducts();
+updateCartTotals();
+
 
 
 /* =========================

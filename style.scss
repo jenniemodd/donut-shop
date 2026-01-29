@@ -204,14 +204,16 @@ body {
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .cart-content {
-  overflow-y: auto;
+  overflow: visible;
   flex: 1;
-  padding-right: 0.5rem;
   padding-bottom: 4rem;
   padding-top: 1rem;
+  box-sizing: border-box;
+  padding-right: 1.5rem;
 }
 
 .close-cart {
@@ -282,19 +284,22 @@ body {
 #checkoutForm input[type="email"],
 #checkoutForm input[type="tel"] {
   width: 100%;
-  padding: 0.6rem;
+  padding: 0.4rem;
   margin-top: 0.25rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-family: inherit;
   font-size: 0.95rem;
+  display: block;
+  margin-inline: auto;
 }
 
-/* Fokus – viktigt för tillgänglighet */
+/* Fokus  */
 #checkoutForm input:focus {
   outline: 3px solid #65c2b0;
   outline-offset: 2px;
 }
+
 
 /* ------------------ RADIO & CHECKBOX ------------------ */
 
@@ -398,6 +403,7 @@ body {
 
     width: 100%;
     height: 100vh;
+    inset: 0;
 
     padding: 1rem;
   }
@@ -406,7 +412,7 @@ body {
 .cart-wrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* 👈 tryck allt åt höger */
+  justify-content: flex-end;
   gap: 0.4rem;
   max-width: 100%;
 }

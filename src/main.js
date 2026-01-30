@@ -1,67 +1,121 @@
 /*
 PSEUDOKOD – WEBBSHOP MED MUNKAR
 
-1. Skapa en array med produkterna för munkarna: plain, glazed och sugar
-   Varje produkt ska ha:
-   - name
-   - price
-   - rating
-   - category
-   - image
+1. Skapa produkter
+   - Skapa ett objekt för varje munk (plain, glazed, sugar)
+   - Varje produkt ska innehålla:
+     - id
+     - name
+     - price
+     - rating
+     - category
+     - image
+     - alt-text
 
-2. Spara alla produkter i en huvudlista (products)
+2. Lägg alla produkter i en array
+   - Spara alla produktobjekt i en lista som heter products
 
-3. Hämta HTML-element:
-   - produktcontainer
-   - filterknappar
+3. Skapa varukorg
+   - Skapa en tom array cart
+   - Den ska innehålla de produkter som användaren lägger i varukorgen
 
-4. När sidan laddas:
-   - anropa funktion som visar alla produkter
+4. Hämta HTML-element
+   - Hämta:
+     - container där produkter ska visas
+     - filter-dropdown
+     - sorterings-dropdown
+     - varukorg (öppna/stäng)
+     - checkout-formulär
+     - totalpris, rabatt och frakt
 
-5. Funktion: renderProducts(lista)
-   - töm produktcontainern
-   - loopa igenom listan
-   - skapa HTML för varje produkt
-   - lägg till produkten i containern
+5. När sidan laddas
+   - Visa alla produkter genom att anropa renderProducts()
+   - Räkna och visa totalsumma (0 kr från start)
 
-6. Lägg till event listeners på filterdropdown:
-   - använd change
-    - hämta vald kategori
-    - filtrera products-arrayen
-    - skicka filtrerad lista till renderProducts
+6. Funktion: renderProducts()
+   - Töm produktcontainern
+   - Loopa igenom listan med produkter som ska visas
+   - För varje produkt:
+     - Visa bild, namn och pris
+     - Skapa + och − knappar
+     - Skapa knapp för "Lägg i varukorg"
+   - Lägg till event listeners på knapparna
 
-7. Vid klick på "visa alla":
-   - skicka hela products-arrayen till renderProducts
+7. Filtrering av produkter
+   - När användaren väljer kategori i dropdown:
+     - Kontrollera valt värde
+     - Filtrera products-arrayen
+     - Spara resultatet i filteredProducts
+     - Kör renderProducts() igen
 
-8. Skapa en dropdown för sorteringsfunktion i HTML;
--Namn
--Pris
--Betyg
--Kategori
+8. Sortering av produkter
+   - När användaren väljer sortering:
+     - Sortera filteredProducts efter:
+       - namn
+       - pris
+       - betyg
+       - kategori
+     - Visa resultatet med renderProducts()
 
-9.För varje "change" på sorteringsknapparna så ska produkterna sorteras i stigande ordning baserat på vald sorteringsmetod.
-   - Lägg till event listener på sorteringsdropdown
-   -Sortera filteredProducts baserat på vald metod (Namn, pris, katergori och betyg)
-   -Användaren ska kunna filtera och sortera samtidigt.
-   -kör Render Products
+9. Ändra antal produkter
+   - + ökar antal
+   - − minskar antal
+   - Antalet får aldrig bli mindre än 0
 
-10. Skapa en tom array cart för varukorgen
--Varukorgen ska innehålla de produkterna som användaren har valt.   
+10. Lägg till produkt i varukorgen
+    - När användaren klickar på "Lägg i varukorg":
+      - Hämta produktens id och valt antal
+      - Om antal är 0 → gör inget
+      - Kontrollera om produkten redan finns i cart:
+        - Om ja → öka antal
+        - Om nej → lägg till produkten
+      - Uppdatera varukorgen och totalsumman
 
-10. Skapa + och - för atta öka och minska antal munkar.
-- Se till så att man inte kan få mer än 0 på minus (Så det inte blir -1)
+11. Visa varukorgen
+    - Visa alla produkter som finns i cart
+    - För varje produkt:
+      - Visa namn och antal
+      - Visa +, − och ta bort-knapp
+    - Uppdatera varukorgen varje gång något ändras
 
-11. När användaren klickar på lägg i varukorg så ska:
--man hämta produkterns id och antal
--om antalet är 0 ska inget göras
--Kolla om produkten finns i varukorgen:
-- om ja, öka antalet,
-- om nej, lägg till produkten i varukorgen
+12. Prisregler (specialregler)
+    - På fredagar efter kl. 15 och under helgen:
+      - Lägg på 15 % på priset (syns bara i priset)
+    - Om kunden köper minst 10 av samma sort:
+      - Ge 10 % rabatt på just den produkten
+    - På måndagar innan kl. 10:
+      - Ge 10 % rabatt på hela beställningen
+      - Visa text om måndagsrabatt
 
-12. Visa varukorg baserat på varukorgs arrayen. 
--HTML uppdateras varje gång cart ändras. 
+13. Frakt
+    - Om totalt antal munkar är mer än 15:
+      - Frakt = 0 kr
+    - Annars:
+      - Frakt = 25 kr + 10 % av totalsumman
+    - Visa fraktkostnaden i varukorgen
 
+14. Betalsätt
+    - Kunden kan välja kort eller faktura
+    - Om totalsumman överstiger 800 kr:
+      - Inaktivera faktura som betalsätt
+      - Växla automatiskt till kort om faktura var vald
+
+15. Checkout-formulär
+    - Validera alla fält med regex
+    - Visa felmeddelanden om något är fel
+    - Skicka-knappen är inaktiv tills:
+      - Alla fält är korrekt ifyllda
+      - Ett betalsätt är valt
+      - Villkoren är godkända
+
+16. Tidsgräns
+    - Starta en timer på 15 minuter
+    - Om tiden tar slut:
+      - Töm varukorgen
+      - Rensa formuläret
+      - Visa ett meddelande till användaren
 */
+
 
 import '/style.scss';
 

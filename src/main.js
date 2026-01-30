@@ -272,6 +272,7 @@ const invoiceRadio = document.querySelector('input[name="payment"][value="invoic
 // Datum
 const date = new Date();
 
+
 const FRIDAY = 5;
 const SATURDAY = 6;
 const SUNDAY = 0;

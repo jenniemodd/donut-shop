@@ -219,8 +219,13 @@ const date = new Date(2026, 1, 2, 9, 0);
 // VID INLÄMNING:
 // const date = new Date();
 
-const MONDAY = 1;
 const FRIDAY = 5;
+const SATURDAY = 6;
+const SUNDAY = 0;
+const MONDAY = 1;
+
+const day = date.getDay();
+const hour = date.getHours();
 
 // Räknar ut totalsumman i varukorgen
 function updateCartTotals() {
@@ -245,11 +250,18 @@ function updateCartTotals() {
 
   // FREDAG RABATT
 
-  if (date.getDay() === FRIDAY && date.getHours() > 15) {
-    cartSum *= 0.75;
-  } else {
-    document.querySelector('#discount').textContent = '';
-  }
+const day = date.getDay();
+const hour = date.getHours();
+
+const isWeekendSurcharge =
+  (day === FRIDAY && hour >= 15) ||
+  day === SATURDAY ||
+  day === SUNDAY ||
+  (day === MONDAY && hour < 3);
+
+if (isWeekendSurcharge) {
+  cartSum *= 1.15;
+}
 
   // 3. FRAKT
   if (totalProductCount > 15) {

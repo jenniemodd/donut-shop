@@ -480,7 +480,7 @@ console.log ()
 
 renderProducts();
 updateCartTotals();
-
+calculateShipping();
 
 
 /* =========================

@@ -440,10 +440,10 @@ function renderProducts() {
         <div class="amount-controls">
           <button class="decrease" data-id="${product.id}">−</button>
           <input
-  id="amount-${product.id}"
-  value="0"
-  disabled
-  aria-label="Antal ${product.name}">
+        id="amount-${product.id}"
+        value="0"
+        disabled
+        aria-label="Antal ${product.name}">
 
           <button class="increase" data-id="${product.id}">+</button>
         </div>

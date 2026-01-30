@@ -220,6 +220,7 @@ const date = new Date(2026, 1, 2, 9, 0);
 // const date = new Date();
 
 const MONDAY = 1;
+const FRIDAY = 5;
 
 // Räknar ut totalsumman i varukorgen
 function updateCartTotals() {
@@ -238,6 +239,14 @@ function updateCartTotals() {
     cartSum *= 0.9;
     document.querySelector('#discount').textContent =
       'Måndagsrabatt: 10 % på hela beställningen';
+  } else {
+    document.querySelector('#discount').textContent = '';
+  }
+
+  // FREDAG RABATT
+
+  if (date.getDay() === FRIDAY && date.getHours() > 15) {
+    cartSum *= 0.75;
   } else {
     document.querySelector('#discount').textContent = '';
   }

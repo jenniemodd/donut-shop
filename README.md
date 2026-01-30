@@ -30,7 +30,7 @@ Authors
 
 @jenniemodd
 
-Länk till live-version: http://localhost:5173/fed25d-js-intro-inl-1-jenniemodd/
+Länk till live-version: [http://localhost:5173/fed25d-js-intro-inl-1-jenniemodd/](https://medieinstitutet.github.io/fed25d-js-intro-inl-1-jenniemodd/ )
 
 Screenshots
 

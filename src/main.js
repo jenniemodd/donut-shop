@@ -286,10 +286,10 @@ function updateCartTotals() {
   // 2. Måndagsrabatt
   if (date.getDay() === MONDAY && date.getHours() < 10) {
     cartSum *= 0.9;
-    document.querySelector('#discount').textContent =
+    document.querySelector('#discountCart').textContent =
       'Måndagsrabatt: 10 % på hela beställningen';
   } else {
-    document.querySelector('#discount').textContent = '';
+    document.querySelector('#discountCart').textContent = '';
   }
 
   // 3. Frakt

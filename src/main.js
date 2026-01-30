@@ -269,10 +269,8 @@ const invoiceRadio = document.querySelector('input[name="payment"][value="invoic
    Små funktioner som används på flera ställen
 ====================================================== */
 
-// 🔔 TEST (byt till new Date() vid inlämning)
-const date = new Date(2026, 1, 2, 9, 0); // måndag 09:00
-// VID INLÄMNING:
-// const date = new Date();
+// Datum
+const date = new Date();
 
 const FRIDAY = 5;
 const SATURDAY = 6;

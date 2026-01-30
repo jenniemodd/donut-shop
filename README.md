@@ -1,52 +1,38 @@
-## Pseudokod – Webbshop med munkar
+# Webbprojekt - E-handel för munkar
 
-START
+Detta projekt är en enkel e-handel för munkar, skapad som en skoluppgift och mitt första större projekt i JavaScript. Syftet med uppgiften var att träna på JavaScript, DOM-manipulation, formulärvalidering och logik, samt att bygga ihop allt till ett fungerande flöde.
 
-Skapa en lista (array) med produkter
-Varje produkt ska innehålla:
-- namn
-- pris
-- rating
-- kategori
-- bildadress
+Webbshopen visar olika sorters munkar som användaren kan filtrera och sortera, lägga i varukorg och sedan beställa via ett formulär. Allt innehåll (produkter, priser, varukorg m.m.) hanteras i JavaScript.
 
-Skapa minst 10 produkter
-Tilldela varje produkt en kategori:
-- plain
-- glazed
-- sugar
+En stor del av uppgiften var att implementera olika specialregler, till exempel:
 
-Spara alla produkter i en gemensam produktlista
+Rabatt på måndagar före kl. 10
 
-Skapa HTML-struktur:
-- en container för filterknappar
-- en container där produkter ska visas
+Helgpåslag på priser från fredag eftermiddag till tidig måndag morgon
 
-När sidan laddas:
-- visa alla produkter från produktlistan
+Mängdrabatt om man köper många av samma sort
 
-För varje produkt som ska visas:
-- skapa HTML-element
-- visa bild
-- visa namn
-- visa pris
-- visa rating
-- lägg till produkten i produktcontainern
+Gratis frakt vid större beställningar
 
-Skapa filter (interaktiva element):
-- filter för plain
-- filter för chocolate
-- filter för sugar
-- knapp för att visa alla produkter
+Begränsningar i betalsätt beroende på totalsumma
 
-När ett filter klickas:
-- ta reda på vilken kategori som valts
-- filtrera produktlistan baserat på vald kategori
-- töm produktcontainern
-- visa endast filtrerade produkter
+Samt en timeout som rensar beställningen om användaren är inaktiv för länge
 
-När "visa alla" klickas:
-- töm produktcontainern
-- visa alla produkter igen
+Projektet innehåller även formulärvalidering med regex, felmeddelanden, och grundläggande tillgänglighetsanpassning (labels, aria-attribut m.m.).
 
-SLUT
+HTML och CSS har validerats utan kritiska fel och en Lighthouse-rapport har genomförts (98 i tillgänglighet). Det finns fortfarande vissa varningar kring rubrikstruktur eftersom produktkorten renderas dynamiskt i JavaScript, vilket jag valde att inte bygga om i detta skede.
+
+Skärmdumpar på slutresultatet, validering och Lighthouse finns nedan.
+
+Authors
+
+@jenniemodd
+
+
+Screenshots
+
+![Css Validering](<Skärmavbild 2026-01-30 kl. 20.28.25.png>)
+
+![Html Validering](<Skärmavbild 2026-01-30 kl. 16.29.08.png>)
+
+![Lighthouse rapport](<Skärmavbild 2026-01-30 kl. 16.05.00.png>)

@@ -207,6 +207,7 @@ const checkoutFormWrapper = document.querySelector('#checkoutFormWrapper');
 const cartWrapper = document.querySelector('.cart-wrapper');
 const cartTotalEl = document.querySelector('#cart-total');
 const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
+const invoiceRadio = document.querySelector('input[name="payment"][value="invoice"]');
 
 
 /* ======================================================
@@ -215,7 +216,7 @@ const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
 ====================================================== */
 
 // 🔔 TEST (byt till new Date() vid inlämning)
-const date = new Date(2026, 1, 6, 16, 0);
+const date = new Date(); // måndag 09:00
 // VID INLÄMNING:
 // const date = new Date();
 
@@ -224,8 +225,37 @@ const SATURDAY = 6;
 const SUNDAY = 0;
 const MONDAY = 1;
 
-const day = date.getDay();
-const hour = date.getHours();
+
+// Fredagsrabatt
+
+function getAdjustedPrice(product) {
+  let price = product.price;
+
+  const day = date.getDay();
+  const hour = date.getHours();
+
+  const isWeekendPrice =
+    (day === FRIDAY && hour >= 15) ||
+    day === SATURDAY ||
+    day === SUNDAY ||
+    (day === MONDAY && hour < 3);
+
+  if (isWeekendPrice) {
+    price *= 1.15; // +15 %
+  }
+
+  // 10% rabatt med 10 stycken av samma sort
+
+  const sameProductInCart = cart.find(p => p.id === product.id);
+
+  if (sameProductInCart && sameProductInCart.amount >= 10) {
+    price *= 0.9;
+
+  }
+
+
+  return price;
+}
 
 // Räknar ut totalsumman i varukorgen
 function updateCartTotals() {
@@ -235,9 +265,23 @@ function updateCartTotals() {
 
   // 1. Räkna summa & antal
   cart.forEach(product => {
-    cartSum += product.price * product.amount;
+    cartSum += getAdjustedPrice(product) * product.amount;
     totalProductCount += product.amount;
   });
+
+  // FAKTURA-SPÄRR ÖVER 800 KR
+ 
+  if (cartSum > 800) {
+    invoiceRadio.disabled = true;
+
+    if (invoiceRadio.checked) {
+      invoiceRadio.checked = false;
+      cardFields.removeAttribute('hidden');
+      invoiceFields.setAttribute('hidden', '');
+    }
+  } else {
+    invoiceRadio.disabled = false;
+  }
 
   // 2. MÅNDAGSRABATT
   if (date.getDay() === MONDAY && date.getHours() < 10) {
@@ -248,26 +292,11 @@ function updateCartTotals() {
     document.querySelector('#discount').textContent = '';
   }
 
-  // FREDAG RABATT
-
-const day = date.getDay();
-const hour = date.getHours();
-
-const isWeekendSurcharge =
-  (day === FRIDAY && hour >= 15) ||
-  day === SATURDAY ||
-  day === SUNDAY ||
-  (day === MONDAY && hour < 3);
-
-if (isWeekendSurcharge) {
-  cartSum *= 1.15;
-}
-
   // 3. FRAKT
   if (totalProductCount > 15) {
     shippingCost = 0;
   } else {
-    shippingCost = 25 + (cartSum * 0);
+    shippingCost = 25 + (cartSum * 0.1);
   }
 
   document.querySelector('#shippingCost').textContent =
@@ -279,7 +308,6 @@ if (isWeekendSurcharge) {
   cartTotalEl.textContent = `${Math.round(totalWithShipping)} kr`;
   cartSummaryTotalEl.textContent = `${Math.round(totalWithShipping)} kr`;
 }
-
 
 // Liten animation när något läggs i varukorgen
 function animateCart() {
@@ -407,7 +435,7 @@ function renderProducts() {
       <article class="product-card">
         <img src="${product.image}" alt="${product.alt}">
         <h3>${product.name}</h3>
-        <p>${product.price} kr</p>
+        <p>${Math.round(getAdjustedPrice(product))} kr</p>
 
         <div class="amount-controls">
           <button class="decrease" data-id="${product.id}">−</button>
@@ -501,7 +529,6 @@ console.log ()
 
 renderProducts();
 updateCartTotals();
-calculateShipping();
 
 
 /* =========================
@@ -530,6 +557,7 @@ const personnummer = document.querySelector('#personnummer');
 const invoiceFields = document.querySelector('#invoiceFields');
 const cardFields = document.querySelector('#cardFields');
 const paymentRadios = document.querySelectorAll('input[name="payment"]');
+
 
 // HELPERS
 function showError(field, show) {

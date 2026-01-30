@@ -215,7 +215,7 @@ const cartSummaryTotalEl = document.querySelector('.cart-summary-total');
 ====================================================== */
 
 // 🔔 TEST (byt till new Date() vid inlämning)
-const date = new Date(2026, 1, 2, 9, 0);
+const date = new Date(2026, 1, 6, 16, 0);
 // VID INLÄMNING:
 // const date = new Date();
 

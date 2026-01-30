@@ -67,7 +67,7 @@ import '/style.scss';
 
 
 const plainMunk = {
-    id: 1,
+  id: 1,
   name: "Vanlig Munk",
   price: 40,
   rating: 4,
@@ -77,7 +77,7 @@ const plainMunk = {
 };
 
 const plainMunk6Pack = {
-    id: 2,
+  id: 2,
   name: "Vanlig Munk 6-pack",
   price: 220,
   rating: 3.8,
@@ -87,7 +87,7 @@ const plainMunk6Pack = {
 };
 
 const plainMunk3Pack = {
-    id: 3,
+  id: 3,
   name: "Vanlig Munk 3-pack",
   price: 100,
   rating: 3.9,
@@ -98,7 +98,7 @@ const plainMunk3Pack = {
 
 
 const glazedMunkchocolate = {
-    id: 4,
+  id: 4,
   name: "Chocklad Munk",
   price: 45,
   rating: 4.5,
@@ -108,7 +108,7 @@ const glazedMunkchocolate = {
 };
 
 const glazedMunkblueberry = {
-    id: 5,
+  id: 5,
   name: "Blåbär Munk",
   price: 50,
   rating: 4,
@@ -118,7 +118,7 @@ const glazedMunkblueberry = {
 };
 
 const glazedMunkraspberry = {
-    id: 6,
+  id: 6,
   name: "Hallon Munk",
   price: 55,
   rating: 3.8,
@@ -128,7 +128,7 @@ const glazedMunkraspberry = {
 };
 
 const glazedMunkstrawberry = {
-    id: 7,
+  id: 7,
   name: "Jordgubb Munk",
   price: 60,
   rating: 4.3,
@@ -139,7 +139,7 @@ const glazedMunkstrawberry = {
 
 
 const sugarMunk = {
-    id: 8,
+  id: 8,
   name: "Socker Munk",
   price: 35,
   rating: 4.2,
@@ -149,7 +149,7 @@ const sugarMunk = {
 };
 
 const sugarMunk6Pack = {
-    id: 9,
+  id: 9,
   name: "Socker Munk 6-pack",
   price: 180,
   rating: 4,
@@ -159,7 +159,7 @@ const sugarMunk6Pack = {
 };
 
 const sugarMunk3Pack = {
-    id: 10,
+  id: 10,
   name: "Socker Munk 3-pack",
   price: 80,
   rating: 3.5,
@@ -169,7 +169,7 @@ const sugarMunk3Pack = {
 };
 
 const products = [
-     plainMunk,
+  plainMunk,
   plainMunk3Pack,
   plainMunk6Pack,
   glazedMunkchocolate,
@@ -270,7 +270,7 @@ function updateCartTotals() {
   });
 
   // Faktura-spärr över 800 kr
- 
+
   if (cartSum > 800) {
     invoiceRadio.disabled = true;
 
@@ -439,7 +439,12 @@ function renderProducts() {
 
         <div class="amount-controls">
           <button class="decrease" data-id="${product.id}">−</button>
-          <input id="amount-${product.id}" value="0" disabled>
+          <input
+  id="amount-${product.id}"
+  value="0"
+  disabled
+  aria-label="Antal ${product.name}">
+
           <button class="increase" data-id="${product.id}">+</button>
         </div>
 
@@ -521,7 +526,7 @@ closeCartBtn.addEventListener('click', () => {
 });
 
 
-console.log ()
+console.log()
 
 /* ======================================================
    INIT – KÖRS NÄR SIDAN LADDAS
@@ -537,11 +542,11 @@ updateCartTotals();
 
 // Regex
 const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
-const lastNameRegEx  = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
-const emailRegEx     = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phoneRegEx     = /^(\+46|0)[0-9]{7,10}$/;
-const postalRegEx    = /^[0-9]{3}\s?[0-9]{2}$/;
-const personRegEx    = /^(\d{6}|\d{8})[-+]?\d{4}$/;
+const lastNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
+const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegEx = /^(\+46|0)[0-9]{7,10}$/;
+const postalRegEx = /^[0-9]{3}\s?[0-9]{2}$/;
+const personRegEx = /^(\d{6}|\d{8})[-+]?\d{4}$/;
 
 // Elment
 const checkoutForm = document.querySelector('#checkoutForm');

@@ -6,15 +6,15 @@ Webbshopen visar olika sorters munkar som användaren kan filtrera och sortera, 
 
 En stor del av uppgiften var att implementera olika specialregler, till exempel:
 
-Rabatt på måndagar före kl. 10
+- Rabatt på måndagar före kl. 10
 
-Helgpåslag på priser från fredag eftermiddag till tidig måndag morgon
+- Helgpåslag på priser från fredag eftermiddag till tidig måndag morgon
 
-Mängdrabatt om man köper många av samma sort
+- Mängdrabatt om man köper många av samma sort
 
-Gratis frakt vid större beställningar
+- Gratis frakt vid större beställningar
 
-Begränsningar i betalsätt beroende på totalsumma
+- - Begränsningar i betalsätt beroende på totalsumma
 
 Samt en timeout som rensar beställningen om användaren är inaktiv för länge
 
@@ -22,12 +22,15 @@ Projektet innehåller även formulärvalidering med regex, felmeddelanden, och g
 
 HTML och CSS har validerats utan kritiska fel och en Lighthouse-rapport har genomförts (98 i tillgänglighet). Det finns fortfarande vissa varningar kring rubrikstruktur eftersom produktkorten renderas dynamiskt i JavaScript, vilket jag valde att inte bygga om i detta skede.
 
+Projektet är byggt utan externa ramverk och använder HTML, CSS (SCSS) och JavaScript.
+
 Skärmdumpar på slutresultatet, validering och Lighthouse finns nedan.
 
 Authors
 
 @jenniemodd
 
+Länk till live-version: http://localhost:5173/fed25d-js-intro-inl-1-jenniemodd/
 
 Screenshots
 

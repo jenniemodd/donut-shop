@@ -66,25 +66,31 @@
 
                 <span id="firstNameError" class="hidden error">Fel: Förnamn behöver minst två bokstäver</span>
 
-                <label for="lastName">Efternamn</label>
+                <label for="lastName">Efternamn*</label>
                 <input type="text" id="lastName" name="lastName" required>
 
-                <label for="address">Adress</label>
+                   <span id="lastNameError" class="hidden error">Fel: Efternamn behöver minst två bokstäver</span>
+
+                <label for="address">Adress*</label>
                 <input type="text" id="address" name="address" required>
 
-                <label for="postalCode">Postnummer</label>
+                <label for="postalCode">Postnummer*</label>
                 <input type="text" id="postalCode" name="postalCode" required>
 
-                <label for="city">Postort</label>
+                 <span id="postalCodeError" class="hidden error">Fel: Postnumret ska bestå av fem siffror (t.ex. 12345 eller 123 45).</span>
+
+                <label for="city">Postort*</label>
                 <input type="text" id="city" name="city" required>
 
                 <label for="doorCode">Portkod (valfritt)</label>
                 <input type="text" id="doorCode" name="doorCode">
 
-                <label for="phone">Telefon (mobil)</label>
+                <label for="phone">Telefon (mobil)*</label>
                 <input type="tel" id="phone" name="phone" required>
 
-                <label for="email">E-postadress</label>
+                <span id="phoneError" class="hidden error">Fel: Ange ett giltigt mobilnummer (t.ex. 0701234567 eller +46701234567).</span>
+
+                <label for="email">E-postadress*</label>
                 <input type="email" id="email" name="email" required>
                 <span id="emailField" class="hidden error">Fel: E-postadressen har fel format</span>
               </fieldset>

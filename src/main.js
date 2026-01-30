@@ -269,7 +269,7 @@ function updateCartTotals() {
     totalProductCount += product.amount;
   });
 
-  // FAKTURA-SPÄRR ÖVER 800 KR
+  // Faktura-spärr över 800 kr
  
   if (cartSum > 800) {
     invoiceRadio.disabled = true;
@@ -283,7 +283,7 @@ function updateCartTotals() {
     invoiceRadio.disabled = false;
   }
 
-  // 2. MÅNDAGSRABATT
+  // 2. Måndagsrabatt
   if (date.getDay() === MONDAY && date.getHours() < 10) {
     cartSum *= 0.9;
     document.querySelector('#discount').textContent =
@@ -292,7 +292,7 @@ function updateCartTotals() {
     document.querySelector('#discount').textContent = '';
   }
 
-  // 3. FRAKT
+  // 3. Frakt
   if (totalProductCount > 15) {
     shippingCost = 0;
   } else {
@@ -302,7 +302,7 @@ function updateCartTotals() {
   document.querySelector('#shippingCost').textContent =
     `Fraktkostnad: ${Math.round(shippingCost)} kr`;
 
-  // 4. TOTAL INKL FRAKT
+  // 4. total inkl Frakt
   const totalWithShipping = cartSum + shippingCost;
 
   cartTotalEl.textContent = `${Math.round(totalWithShipping)} kr`;
@@ -532,10 +532,10 @@ updateCartTotals();
 
 
 /* =========================
-   CHECKOUT – VALIDATION
+   CHECKOUT – VALIDERING
 ========================= */
 
-// REGEX
+// Regex
 const firstNameRegEx = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
 const lastNameRegEx  = /^[A-Za-zÀ-ÿ\s'-]{2,}$/;
 const emailRegEx     = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -543,7 +543,7 @@ const phoneRegEx     = /^(\+46|0)[0-9]{7,10}$/;
 const postalRegEx    = /^[0-9]{3}\s?[0-9]{2}$/;
 const personRegEx    = /^(\d{6}|\d{8})[-+]?\d{4}$/;
 
-// ELEMENT
+// Elment
 const checkoutForm = document.querySelector('#checkoutForm');
 const orderBtn = checkoutForm.querySelector('button[type="submit"]');
 
@@ -559,7 +559,7 @@ const cardFields = document.querySelector('#cardFields');
 const paymentRadios = document.querySelectorAll('input[name="payment"]');
 
 
-// HELPERS
+// Hjälpare
 function showError(field, show) {
   const error = field.nextElementSibling;
   if (!error) return;
@@ -568,7 +568,7 @@ function showError(field, show) {
   field.setAttribute('aria-invalid', show ? 'true' : 'false');
 }
 
-// VALIDATION FUNCTIONS
+// Valideringsfunktioner för inputfält
 function validateField(field, regex) {
   const value = field.value.trim();
   if (value.length === 0) return undefined;
@@ -603,7 +603,7 @@ function validatePersonnummer() {
   return validateField(personnummer, personRegEx);
 }
 
-// PAYMENT TOGGLE
+// Betalningsval
 paymentRadios.forEach(radio => {
   radio.addEventListener('change', () => {
     if (radio.value === 'card' && radio.checked) {
@@ -620,7 +620,7 @@ paymentRadios.forEach(radio => {
   });
 });
 
-// EVENT LISTENERS
+// Eventlyssnare
 [
   firstName,
   lastName,
@@ -632,7 +632,7 @@ paymentRadios.forEach(radio => {
   field.addEventListener('focusout', checkFormValidity);
 });
 
-// CHECK ALL
+// Funktion - Validering formulär
 function checkFormValidity() {
   orderBtn.setAttribute('disabled', '');
 
@@ -657,7 +657,7 @@ function checkFormValidity() {
   orderBtn.removeAttribute('disabled');
 }
 
-// SUBMIT
+// Beställningsbekräftelse
 checkoutForm.addEventListener('submit', e => {
   e.preventDefault();
   if (orderBtn.disabled) return;
@@ -665,7 +665,7 @@ checkoutForm.addEventListener('submit', e => {
 });
 
 
-// TIMER
+// Timer
 
 const SLOWNESS_TIMER_MINUTES = 15;
 

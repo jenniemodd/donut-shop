@@ -126,7 +126,7 @@ const plainMunk = {
   price: 40,
   rating: 4,
   category: "plain",
-  image: "./content/vanligmunk.jpg",
+  image: "/content/vanligmunk.jpg",
   alt: "Bild på en vanlig munk"
 };
 
@@ -136,7 +136,7 @@ const plainMunk6Pack = {
   price: 220,
   rating: 3.8,
   category: "plain",
-  image: "./content/vanligmunk6pack.jpg",
+  image: "/content/vanligmunk6pack.jpg",
   alt: "Bild på 6 vanliga munkar"
 };
 
@@ -146,7 +146,7 @@ const plainMunk3Pack = {
   price: 100,
   rating: 3.9,
   category: "plain",
-  image: "./content/vanligmunk3pack.jpg",
+  image: "/content/vanligmunk3pack.jpg",
   alt: "Bild på tre vanliga munkar"
 };
 
@@ -157,7 +157,7 @@ const glazedMunkchocolate = {
   price: 45,
   rating: 4.5,
   category: "glazed",
-  image: "./content/chockladmunk.jpg",
+  image: "/content/chockladmunk.jpg",
   alt: "Bild på en chokladmunk"
 };
 
@@ -167,7 +167,7 @@ const glazedMunkblueberry = {
   price: 50,
   rating: 4,
   category: "glazed",
-  image: "./content/blabarsmunk.jpg",
+  image: "/content/blabarsmunk.jpg",
   alt: "Bild på en blåbärsmunk"
 };
 
@@ -177,7 +177,7 @@ const glazedMunkraspberry = {
   price: 55,
   rating: 3.8,
   category: "glazed",
-  image: "./content/hallonmunk.jpg",
+  image: "/content/hallonmunk.jpg",
   alt: "Bild på en hallonmunk"
 };
 
@@ -187,7 +187,7 @@ const glazedMunkstrawberry = {
   price: 60,
   rating: 4.3,
   category: "glazed",
-  image: "./content/jordgubbsmunk.jpg",
+  image: "/content/jordgubbsmunk.jpg",
   alt: "Bild på en jordgubbsmunk"
 };
 
@@ -198,7 +198,7 @@ const sugarMunk = {
   price: 35,
   rating: 4.2,
   category: "sugar",
-  image: "./content/sockradmunk.jpg",
+  image: "/content/sockradmunk.jpg",
   alt: "Bild på en sockermunk"
 };
 
@@ -208,7 +208,7 @@ const sugarMunk6Pack = {
   price: 180,
   rating: 4,
   category: "sugar",
-  image: "./content/sockradmunk6pack.jpg",
+  image: "/content/sockradmunk6pack.jpg",
   alt: "Bild på 6 sockermunkar"
 };
 
@@ -218,7 +218,7 @@ const sugarMunk3Pack = {
   price: 80,
   rating: 3.5,
   category: "sugar",
-  image: "./content/sockradmunk3pack.jpg",
+  image: "/content/sockradmunk3pack.jpg",
   alt: "Bild på 3 sockermunkar"
 };
 
